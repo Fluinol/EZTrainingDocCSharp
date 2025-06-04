@@ -76,7 +76,8 @@ namespace EZTrainingDocCSharp
 
         private void btnViewScreenhots_Click(object sender, EventArgs e)
         {
-
+            var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
+            previewForm.ShowDialog(this);
         }
     }
 }
