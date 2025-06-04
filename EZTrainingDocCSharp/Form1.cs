@@ -73,6 +73,11 @@ namespace EZTrainingDocCSharp
             capturedScreenshotsList.Clear();
             UpdateStatus("Screenshot list cleared.");
         }
+
+        private void btnViewScreenhots_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

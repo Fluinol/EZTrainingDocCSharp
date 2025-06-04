@@ -34,19 +34,33 @@ namespace EZTrainingDocCSharp.WordEditing
                         string imgPath = Path.Combine(Path.GetTempPath(), $"screenshot_{i}.png");
                         screenshots[i].Save(imgPath, ImageFormat.Png);
 
-                        var title = doc.Content.Paragraphs.Add(ref missing);
-                        //Navigation line
-                        title.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
-                        title.Range.Text = $"← Previous (Step {i:D2}) | Next (Step {i + 2:D2}) →".PadRight(50);
-                        title.Range.InsertParagraphAfter();
-                        //Step line
-                        title.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
-                        title.Range.Text = $"Step {i + 1}:";
-                        title.Range.InsertParagraphAfter();
-                        //Description line
-                        title.Range.Text = $"{i + 1}: AddDescriptionForScreenShotHere";
-                        title.Range.InsertParagraphAfter();
-                        //Screenshot line
+                        // Navigation line
+                        var navLine = doc.Content.Paragraphs.Add(ref missing);
+                        navLine.Range.Text = $"← Previous (Step {i:D2}) | Next (Step {i + 2:D2}) →";
+                        navLine.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
+
+                        // Add bookmark to the navigation line
+                        string bookmarkName = $"Step_{(i + 1).ToString("D2")}";
+                        doc.Bookmarks.Add(bookmarkName, navLine.Range);
+
+                        navLine.Range.InsertParagraphAfter();
+
+                        // Step line
+                        var stepLine = doc.Content.Paragraphs.Add(ref missing);                        
+                        // Apply the default "Heading 2" style
+                        //stepLine.Range.set_Style("Heading 2");
+                        stepLine.Range.set_Style(Word.WdBuiltinStyle.wdStyleHeading2);
+                        stepLine.Range.Text = $"Step {i + 1}:";
+                        stepLine.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                        stepLine.Range.InsertParagraphAfter();
+
+                        // Description line
+                        var stepDescriptionLine = doc.Content.Paragraphs.Add(ref missing);
+                        stepDescriptionLine.Range.Text = $"{i + 1}: AddDescriptionForScreenShotHere";
+                        stepDescriptionLine.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+                        stepDescriptionLine.Range.InsertParagraphAfter();
+
+                        // Screenshot line
                         var paraImg = doc.Content.Paragraphs.Add(ref missing);
                         paraImg.Range.InlineShapes.AddPicture(imgPath, ref missing, ref missing, ref missing);
                         paraImg.Range.InsertParagraphAfter();

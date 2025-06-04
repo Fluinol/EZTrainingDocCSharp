@@ -43,10 +43,11 @@
             this.btnPause = new System.Windows.Forms.Button();
             this.btnChangeFolder = new System.Windows.Forms.Button();
             this.btnSaveToWord = new System.Windows.Forms.Button();
-            this.btnnClearMemory = new System.Windows.Forms.Button();
+            this.btnClearMemory = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.lblSelectedFolder = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.btnViewScreenhots = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +62,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(657, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(821, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -163,15 +164,15 @@
             this.btnSaveToWord.UseVisualStyleBackColor = true;
             this.btnSaveToWord.Click += new System.EventHandler(this.btnSaveToWord_Click);
             // 
-            // btnnClearMemory
+            // btnClearMemory
             // 
-            this.btnnClearMemory.Location = new System.Drawing.Point(489, 54);
-            this.btnnClearMemory.Name = "btnnClearMemory";
-            this.btnnClearMemory.Size = new System.Drawing.Size(158, 30);
-            this.btnnClearMemory.TabIndex = 5;
-            this.btnnClearMemory.Text = "Clear memory";
-            this.btnnClearMemory.UseVisualStyleBackColor = true;
-            this.btnnClearMemory.Click += new System.EventHandler(this.btnnClearMemory_Click);
+            this.btnClearMemory.Location = new System.Drawing.Point(489, 54);
+            this.btnClearMemory.Name = "btnClearMemory";
+            this.btnClearMemory.Size = new System.Drawing.Size(158, 30);
+            this.btnClearMemory.TabIndex = 5;
+            this.btnClearMemory.Text = "Clear memory";
+            this.btnClearMemory.UseVisualStyleBackColor = true;
+            this.btnClearMemory.Click += new System.EventHandler(this.btnnClearMemory_Click);
             // 
             // folderBrowserDialog1
             // 
@@ -195,14 +196,25 @@
             this.lblStatus.TabIndex = 8;
             this.lblStatus.Text = "label1";
             // 
+            // btnViewScreenhots
+            // 
+            this.btnViewScreenhots.Location = new System.Drawing.Point(653, 54);
+            this.btnViewScreenhots.Name = "btnViewScreenhots";
+            this.btnViewScreenhots.Size = new System.Drawing.Size(142, 30);
+            this.btnViewScreenhots.TabIndex = 9;
+            this.btnViewScreenhots.Text = "View screenshots";
+            this.btnViewScreenhots.UseVisualStyleBackColor = true;
+            this.btnViewScreenhots.Click += new System.EventHandler(this.btnViewScreenhots_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 168);
+            this.ClientSize = new System.Drawing.Size(821, 232);
+            this.Controls.Add(this.btnViewScreenhots);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblSelectedFolder);
-            this.Controls.Add(this.btnnClearMemory);
+            this.Controls.Add(this.btnClearMemory);
             this.Controls.Add(this.btnSaveToWord);
             this.Controls.Add(this.btnChangeFolder);
             this.Controls.Add(this.btnPause);
@@ -236,10 +248,11 @@
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnChangeFolder;
         private System.Windows.Forms.Button btnSaveToWord;
-        private System.Windows.Forms.Button btnnClearMemory;
+        private System.Windows.Forms.Button btnClearMemory;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label lblSelectedFolder;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnViewScreenhots;
     }
 }
 

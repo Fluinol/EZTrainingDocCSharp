@@ -54,9 +54,9 @@ namespace EZTrainingDocCSharp.MouseListener
         private static void OnLeftClick()
         {
             // FALTA CONECTAR LA CLASE DE PILLAR CLICK CON SACAR SCREENSHOT
-            Console.WriteLine("Left mouse button clicked.");
-            capturedScreenshotsList.Add(screenshot);
-            UpdateStatus($"Screenshot #{capturedScreenshotsList.Count} captured and added to list.");
+           // Console.WriteLine("Left mouse button clicked.");
+            //capturedScreenshotsList.Add(screenshot);
+            //UpdateStatus($"Screenshot #{capturedScreenshotsList.Count} captured and added to list.");
         }
 
         private static void OnRightClick()
