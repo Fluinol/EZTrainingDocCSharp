@@ -40,14 +40,12 @@
             this.ventanaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRecord = new System.Windows.Forms.Button();
-            this.btnPause = new System.Windows.Forms.Button();
-            this.btnChangeFolder = new System.Windows.Forms.Button();
+            this.btnStartPause = new System.Windows.Forms.Button();
             this.btnSaveToWord = new System.Windows.Forms.Button();
-            this.btnClearMemory = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.lblSelectedFolder = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.btnViewScreenhots = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,7 +125,7 @@
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(11, 54);
+            this.btnRecord.Location = new System.Drawing.Point(12, 112);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(92, 30);
             this.btnRecord.TabIndex = 1;
@@ -135,44 +133,25 @@
             this.btnRecord.UseVisualStyleBackColor = true;
             this.btnRecord.Click += new System.EventHandler(this.btnRecord_Click);
             // 
-            // btnPause
+            // btnStartPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(109, 54);
-            this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(103, 30);
-            this.btnPause.TabIndex = 2;
-            this.btnPause.Text = "Pause";
-            this.btnPause.UseVisualStyleBackColor = true;
-            // 
-            // btnChangeFolder
-            // 
-            this.btnChangeFolder.Location = new System.Drawing.Point(218, 54);
-            this.btnChangeFolder.Name = "btnChangeFolder";
-            this.btnChangeFolder.Size = new System.Drawing.Size(139, 30);
-            this.btnChangeFolder.TabIndex = 3;
-            this.btnChangeFolder.Text = "Change Folder";
-            this.btnChangeFolder.UseVisualStyleBackColor = true;
-            this.btnChangeFolder.Click += new System.EventHandler(this.btnChangeFolder_Click);
+            this.btnStartPause.Location = new System.Drawing.Point(12, 30);
+            this.btnStartPause.Name = "btnStartPause";
+            this.btnStartPause.Size = new System.Drawing.Size(137, 30);
+            this.btnStartPause.TabIndex = 2;
+            this.btnStartPause.Text = "Start recording";
+            this.btnStartPause.UseVisualStyleBackColor = true;
+            this.btnStartPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnSaveToWord
             // 
-            this.btnSaveToWord.Location = new System.Drawing.Point(363, 54);
+            this.btnSaveToWord.Location = new System.Drawing.Point(143, 112);
             this.btnSaveToWord.Name = "btnSaveToWord";
             this.btnSaveToWord.Size = new System.Drawing.Size(120, 30);
             this.btnSaveToWord.TabIndex = 4;
             this.btnSaveToWord.Text = "Save to Word";
             this.btnSaveToWord.UseVisualStyleBackColor = true;
             this.btnSaveToWord.Click += new System.EventHandler(this.btnSaveToWord_Click);
-            // 
-            // btnClearMemory
-            // 
-            this.btnClearMemory.Location = new System.Drawing.Point(489, 54);
-            this.btnClearMemory.Name = "btnClearMemory";
-            this.btnClearMemory.Size = new System.Drawing.Size(158, 30);
-            this.btnClearMemory.TabIndex = 5;
-            this.btnClearMemory.Text = "Clear memory";
-            this.btnClearMemory.UseVisualStyleBackColor = true;
-            this.btnClearMemory.Click += new System.EventHandler(this.btnnClearMemory_Click);
             // 
             // folderBrowserDialog1
             // 
@@ -181,7 +160,7 @@
             // lblSelectedFolder
             // 
             this.lblSelectedFolder.AutoSize = true;
-            this.lblSelectedFolder.Location = new System.Drawing.Point(12, 106);
+            this.lblSelectedFolder.Location = new System.Drawing.Point(12, 160);
             this.lblSelectedFolder.Name = "lblSelectedFolder";
             this.lblSelectedFolder.Size = new System.Drawing.Size(117, 16);
             this.lblSelectedFolder.TabIndex = 7;
@@ -190,34 +169,32 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(13, 137);
+            this.lblStatus.Location = new System.Drawing.Point(12, 190);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(44, 16);
             this.lblStatus.TabIndex = 8;
             this.lblStatus.Text = "label1";
             // 
-            // btnViewScreenhots
+            // btnStop
             // 
-            this.btnViewScreenhots.Location = new System.Drawing.Point(653, 54);
-            this.btnViewScreenhots.Name = "btnViewScreenhots";
-            this.btnViewScreenhots.Size = new System.Drawing.Size(142, 30);
-            this.btnViewScreenhots.TabIndex = 9;
-            this.btnViewScreenhots.Text = "View screenshots";
-            this.btnViewScreenhots.UseVisualStyleBackColor = true;
-            this.btnViewScreenhots.Click += new System.EventHandler(this.btnViewScreenhots_Click);
+            this.btnStop.Location = new System.Drawing.Point(163, 30);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(135, 29);
+            this.btnStop.TabIndex = 10;
+            this.btnStop.Text = "Stop recording";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 232);
-            this.Controls.Add(this.btnViewScreenhots);
+            this.Controls.Add(this.btnStop);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblSelectedFolder);
-            this.Controls.Add(this.btnClearMemory);
             this.Controls.Add(this.btnSaveToWord);
-            this.Controls.Add(this.btnChangeFolder);
-            this.Controls.Add(this.btnPause);
+            this.Controls.Add(this.btnStartPause);
             this.Controls.Add(this.btnRecord);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -245,14 +222,12 @@
         private System.Windows.Forms.ToolStripMenuItem ventanaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.Button btnRecord;
-        private System.Windows.Forms.Button btnPause;
-        private System.Windows.Forms.Button btnChangeFolder;
+        private System.Windows.Forms.Button btnStartPause;
         private System.Windows.Forms.Button btnSaveToWord;
-        private System.Windows.Forms.Button btnClearMemory;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label lblSelectedFolder;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Button btnViewScreenhots;
+        private System.Windows.Forms.Button btnStop;
     }
 }
 

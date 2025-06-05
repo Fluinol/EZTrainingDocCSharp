@@ -79,6 +79,17 @@ namespace EZTrainingDocCSharp
             var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
             previewForm.ShowDialog(this);
         }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
+            previewForm.ShowDialog(this);
+        }
     }
 }
 
