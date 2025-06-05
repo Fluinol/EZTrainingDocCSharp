@@ -1,5 +1,8 @@
-﻿using System;
+﻿using EZTrainingDocCSharp.ScreenCapture;
+using EZTrainingDocCSharp.WordEditing;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,13 +11,14 @@ namespace EZTrainingDocCSharp
     public partial class ScreenshotPreviewForm : Form
     {
         private List<Bitmap> screenshots;
-        private List<CheckBox> checkBoxes = new List<CheckBox>();         
-      
+        private List<CheckBox> checkBoxes = new List<CheckBox>();
+        private string selectedFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-        public ScreenshotPreviewForm(List<Bitmap> screenshots)
+
+        public ScreenshotPreviewForm(List<Bitmap> _screenshots)
         {
             InitializeComponent(); // Make sure this is called if you have a designer part
-            this.screenshots = screenshots;
+            this.screenshots = _screenshots;
             InitializeUI();
         }
 
@@ -140,7 +144,49 @@ namespace EZTrainingDocCSharp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(selectedFolderPath))
+            {
+                MessageBox.Show("Please select an output folder first.", "Folder Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            var creator = new WordDocumentCreator();
+            // Assume Create returns the file path of the created document
+            string docPath = creator.Create(selectedFolderPath, screenshots);
+
+            var result = MessageBox.Show(
+                "Word document created successfully. Do you want to open it?", // Make the question clear
+                "Success",
+                MessageBoxButtons.YesNo, // This provides "Yes" and "No" buttons
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1 // Still makes "Yes" the default selected button
+            );
+
+            // If "Yes" is clicked, open the document
+            if (result == DialogResult.Yes && !string.IsNullOrEmpty(docPath))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(docPath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not open the document: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            // If "Open" is clicked (DialogResult.No if "Open" is the second button)
+            if (result == DialogResult.No && !string.IsNullOrEmpty(docPath))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(docPath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not open the document: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btnChange_Click(object sender, EventArgs e)
@@ -153,7 +199,7 @@ namespace EZTrainingDocCSharp
                 {
                     // You can use dialog.SelectedPath as needed
                     MessageBox.Show($"Selected folder: {dialog.SelectedPath}", "Folder Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // TODO: Handle the selected folder path as needed in your application
+                    selectedFolderPath = dialog.SelectedPath;
                 }
             }
         }
