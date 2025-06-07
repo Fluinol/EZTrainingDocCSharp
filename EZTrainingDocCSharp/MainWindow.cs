@@ -52,7 +52,8 @@ namespace EZTrainingDocCSharp
             }
 
             var creator = new WordDocumentCreator();
-            creator.Create(selectedFolderPath, capturedScreenshotsList, UpdateStatus);
+            //creator.Create(selectedFolderPath, capturedScreenshotsList, UpdateStatus);
+            creator.Create(selectedFolderPath, capturedScreenshotsList);
         }
 
         private void btnChangeFolder_Click(object sender, EventArgs e)

@@ -52,9 +52,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(136, 3);
+            this.btnSave.Location = new System.Drawing.Point(139, 3);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(103, 34);
+            this.btnSave.Size = new System.Drawing.Size(130, 30);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save to Word";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -64,7 +64,7 @@
             // 
             this.btnChange.Location = new System.Drawing.Point(3, 3);
             this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(127, 34);
+            this.btnChange.Size = new System.Drawing.Size(130, 30);
             this.btnChange.TabIndex = 0;
             this.btnChange.Text = "Change";
             this.btnChange.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(245, 9);
+            this.btnDelete.Location = new System.Drawing.Point(316, 3);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(130, 30);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Delete selection";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -94,7 +94,7 @@
             // chkSelectAll
             // 
             this.chkSelectAll.AutoSize = true;
-            this.chkSelectAll.Location = new System.Drawing.Point(93, 9);
+            this.chkSelectAll.Location = new System.Drawing.Point(164, 9);
             this.chkSelectAll.Name = "chkSelectAll";
             this.chkSelectAll.Size = new System.Drawing.Size(146, 20);
             this.chkSelectAll.TabIndex = 1;
@@ -104,9 +104,9 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(12, 7);
+            this.btnClear.Location = new System.Drawing.Point(3, 3);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(130, 30);
             this.btnClear.TabIndex = 0;
             this.btnClear.Text = "Clear all";
             this.btnClear.UseVisualStyleBackColor = true;

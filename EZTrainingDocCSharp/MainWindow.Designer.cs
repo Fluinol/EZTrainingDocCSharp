@@ -127,7 +127,7 @@
             // 
             this.btnRecord.Location = new System.Drawing.Point(12, 112);
             this.btnRecord.Name = "btnRecord";
-            this.btnRecord.Size = new System.Drawing.Size(92, 30);
+            this.btnRecord.Size = new System.Drawing.Size(130, 30);
             this.btnRecord.TabIndex = 1;
             this.btnRecord.Text = "Record";
             this.btnRecord.UseVisualStyleBackColor = true;
@@ -135,9 +135,9 @@
             // 
             // btnStartPause
             // 
-            this.btnStartPause.Location = new System.Drawing.Point(12, 30);
+            this.btnStartPause.Location = new System.Drawing.Point(12, 33);
             this.btnStartPause.Name = "btnStartPause";
-            this.btnStartPause.Size = new System.Drawing.Size(137, 30);
+            this.btnStartPause.Size = new System.Drawing.Size(130, 30);
             this.btnStartPause.TabIndex = 2;
             this.btnStartPause.Text = "Start recording";
             this.btnStartPause.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             // 
             this.btnSaveToWord.Location = new System.Drawing.Point(143, 112);
             this.btnSaveToWord.Name = "btnSaveToWord";
-            this.btnSaveToWord.Size = new System.Drawing.Size(120, 30);
+            this.btnSaveToWord.Size = new System.Drawing.Size(130, 30);
             this.btnSaveToWord.TabIndex = 4;
             this.btnSaveToWord.Text = "Save to Word";
             this.btnSaveToWord.UseVisualStyleBackColor = true;
@@ -177,9 +177,9 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(163, 30);
+            this.btnStop.Location = new System.Drawing.Point(143, 33);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(135, 29);
+            this.btnStop.Size = new System.Drawing.Size(130, 30);
             this.btnStop.TabIndex = 10;
             this.btnStop.Text = "Stop recording";
             this.btnStop.UseVisualStyleBackColor = true;
