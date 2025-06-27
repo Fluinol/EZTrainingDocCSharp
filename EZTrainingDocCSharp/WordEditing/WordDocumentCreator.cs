@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace EZTrainingDocCSharp.WordEditing
@@ -32,44 +33,56 @@ namespace EZTrainingDocCSharp.WordEditing
                         screenshots[i].Save(imgPath, ImageFormat.Png);
 
                         // --- Navigation line ---
-                        // Add a new paragraph for navigation
                         Word.Paragraph navPara = doc.Content.Paragraphs.Add();
                         Word.Range navRange = navPara.Range;
 
-                        // Insert the full nav text
+                        // Compose navigation text
                         string prevText = $"← Previous (Step {i:D2})";
                         string nextText = $"Next (Step {i + 2:D2}) →";
                         string separator = " | ";
-                        string fullText = prevText + separator + nextText;
-                        //navRange.InsertAfter(fullText);
+                        string navText = prevText + separator + nextText;
 
-                        // Calculate exact positions
-                        int start = navRange.Start;
-                        int prevStart = start;
+                        // Insert the navigation text first
+                        navRange.Text = navText;
+
+                        // Add bookmark to nav line (after text is inserted)
+                        string currentBookmarkName = $"Step_{(i + 1):D2}";
+                        doc.Bookmarks.Add(currentBookmarkName, navRange);
+
+                        // Now create subranges for hyperlinks, relative to navRange
+                        int navStart = navRange.Start;
+                        int prevStart = navStart;
                         int prevEnd = prevStart + prevText.Length;
                         int nextStart = prevEnd + separator.Length;
                         int nextEnd = nextStart + nextText.Length;
 
-                        // Create subranges for the two links
-                        Word.Range prevRange = doc.Range(prevStart, prevEnd);
-                        Word.Range nextRange = doc.Range(nextStart, nextEnd);
-
-                        // Add hyperlinks
-                        if (i==0)
-                            doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{(i + 1):D2}", TextToDisplay: prevText);
+                        // "Previous" hyperlink (only if not the first step)
+                        if (i > 0)
+                        {
+                            Word.Range prevRange = doc.Range(prevStart, prevEnd);
+                            // doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{i:D2}", TextToDisplay: prevText);
+                        }
                         else
-                            doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{i:D2}", TextToDisplay: prevText);
-                        doc.Hyperlinks.Add(nextRange, SubAddress: $"Step_{(i + 2):D2}", TextToDisplay: nextText);
+                        {
+                            // For the first step, make "Previous" plain text (not a hyperlink)
+                        }
 
-
-                        // Add bookmark to nav line
-                        string currentBookmarkName = $"Step_{(i + 1):D2}";
-                        doc.Bookmarks.Add(currentBookmarkName, navPara.Range);
+                        // "Next" hyperlink (only if not the last step)
+                        if (i < screenshots.Count - 1)
+                        {
+                            Word.Range nextRange = doc.Range(nextStart, nextEnd);
+                            // doc.Hyperlinks.Add(nextRange, SubAddress: $"Step_{(i + 2):D2}", TextToDisplay: nextText);
+                        }
+                        else
+                        {
+                            // Replace "Next" text with "End" for the last step
+                            Word.Range nextRange = doc.Range(nextStart, nextEnd);
+                            nextRange.Text = "End";
+                        }
 
                         // Align and break
                         navPara.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
                         navPara.Range.InsertParagraphAfter();
-
 
                         // --- Step line ---
                         var stepLine = doc.Content.Paragraphs.Add(ref missing);
@@ -105,6 +118,17 @@ namespace EZTrainingDocCSharp.WordEditing
                 object filePath = Path.Combine(outputFolder, fileName);
                 doc.SaveAs2(ref filePath);
                 return filePath.ToString();
+            }
+            catch (COMException comEx)
+            {
+                // Display a specific error message for COMExceptions
+                string errorMessage = $"COM Error: {comEx.Message}\n" +
+                                      $"HRESULT: 0x{comEx.ErrorCode:X8}\n" +
+                                      $"Source: {comEx.Source}\n" +
+                                      $"Stack Trace:\n{comEx.StackTrace}";
+
+                MessageBox.Show(errorMessage, "COM Error Details", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
             catch (Exception ex)
             {
