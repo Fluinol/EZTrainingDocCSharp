@@ -60,11 +60,13 @@ namespace EZTrainingDocCSharp.WordEditing
                         if (i > 0)
                         {
                             Word.Range prevRange = doc.Range(prevStart, prevEnd);
-                            // doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{i:D2}", TextToDisplay: prevText);
+                            doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{i:D2}", TextToDisplay: prevText);
                         }
                         else
                         {
-                            // For the first step, make "Previous" plain text (not a hyperlink)
+                            // For the first step, make "Previous" hyperlinked always to step 1
+                            Word.Range prevRange = doc.Range(prevStart, prevEnd);
+                            doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{1:D2}", TextToDisplay: $"← Previous (Step {1:D2})");
                         }
 
                         // "Next" hyperlink (only if not the last step)
