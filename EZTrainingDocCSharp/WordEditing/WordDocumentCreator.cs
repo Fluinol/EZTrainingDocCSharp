@@ -49,38 +49,30 @@ namespace EZTrainingDocCSharp.WordEditing
                         string currentBookmarkName = $"Step_{(i + 1):D2}";
                         doc.Bookmarks.Add(currentBookmarkName, navRange);
 
-                        // Now create subranges for hyperlinks, relative to navRange
-                        int navStart = navRange.Start;
-                        int prevStart = navStart;
-                        int prevEnd = prevStart + prevText.Length;
-                        int nextStart = prevEnd + separator.Length;
-                        int nextEnd = nextStart + nextText.Length;
+                        // Calculate offsets relative to navRange.Start
+                        int prevOffset = 0;
+                        int prevEndOffset = prevText.Length;
+                        int nextOffset = prevText.Length + separator.Length;
+                        int nextEndOffset = nextOffset + nextText.Length;
 
-                        // "Previous" hyperlink (only if not the first step)
+                        // Create subranges BEFORE adding any hyperlinks
+                        Word.Range prevRange = navRange.Duplicate;
+                        prevRange.SetRange(navRange.Start + prevOffset, navRange.Start + prevEndOffset);
+
+                        Word.Range nextRange = navRange.Duplicate;
+                        nextRange.SetRange(navRange.Start + nextOffset, navRange.Start + nextEndOffset);
+
+                        // Now add hyperlinks
                         if (i > 0)
-                        {
-                            Word.Range prevRange = doc.Range(prevStart, prevEnd);
                             doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{i:D2}", TextToDisplay: prevText);
-                        }
-                        else
-                        {
-                            // For the first step, make "Previous" hyperlinked always to step 1
-                            Word.Range prevRange = doc.Range(prevStart, prevEnd);
+                        else //First step has no previous link, always step 1
                             doc.Hyperlinks.Add(prevRange, SubAddress: $"Step_{1:D2}", TextToDisplay: $"← Previous (Step {1:D2})");
-                        }
 
-                        // "Next" hyperlink (only if not the last step)
                         if (i < screenshots.Count - 1)
-                        {
-                            Word.Range nextRange = doc.Range(nextStart, nextEnd);
-                            // doc.Hyperlinks.Add(nextRange, SubAddress: $"Step_{(i + 2):D2}", TextToDisplay: nextText);
-                        }
+                            doc.Hyperlinks.Add(nextRange, SubAddress: $"Step_{(i + 2):D2}", TextToDisplay: nextText);
                         else
-                        {
-                            // Replace "Next" text with "End" for the last step
-                            Word.Range nextRange = doc.Range(nextStart, nextEnd);
-                            nextRange.Text = "End";
-                        }
+                            nextRange.Text = "End of the document";
+                            //nextRange.Text = $"Last (Step {i + 2:D2}) →";
 
                         // Align and break
                         navPara.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
