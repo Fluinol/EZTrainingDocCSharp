@@ -116,7 +116,7 @@ namespace EZTrainingDocCSharp
                     //mouseListenerThread = new Thread(() => Mouse.MouseListener.Start(capturedScreenshotsList));
                     //mouseListenerThread.IsBackground = true;
                     Mouse.MouseListener.Start(capturedScreenshotsList);
-                    Mouse.MouseListener.Start();
+                    
                     
                 }
             }
