@@ -1,12 +1,13 @@
 ﻿// MainWindow.cs (UI Layer)
+using EZTrainingDocCSharp.Mouse;
 using EZTrainingDocCSharp.ScreenCapture;
 using EZTrainingDocCSharp.WordEditing;
-using EZTrainingDocCSharp.MouseListener;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
-
 
 namespace EZTrainingDocCSharp
 {
@@ -23,9 +24,12 @@ namespace EZTrainingDocCSharp
         private string selectedFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private List<Bitmap> capturedScreenshotsList = new List<Bitmap>();
         private bool isRecording = false;
+        private static Thread mouseListenerThread;        
+        
+        
 
-        private void UpdateStatus(string message)
-        {
+        public void UpdateStatus(string message)
+        {           
             if (this.Controls.ContainsKey("lblStatus"))
                 this.Controls["lblStatus"].Text = message;
             else
@@ -82,6 +86,17 @@ namespace EZTrainingDocCSharp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            btnStartPause.Text = "Resume recording";
+            UpdateStatus("Recording paused.");
+
+            // Stop MouseListener only if running
+            Mouse.MouseListener.Stop();
+            if (mouseListenerThread != null && mouseListenerThread.IsAlive)
+            {
+                mouseListenerThread.Join(500); // Optionally wait for thread to finish
+                mouseListenerThread = null;
+            }
+
             var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
             previewForm.ShowDialog(this);
         }
@@ -94,12 +109,29 @@ namespace EZTrainingDocCSharp
             {
                 btnStartPause.Text = "Pause";
                 UpdateStatus("Recording started.");
-                //add here the method to start capturing screenshots
+
+                // Start MouseListener only if not already running
+                if (mouseListenerThread == null || !mouseListenerThread.IsAlive)
+                {
+                    //mouseListenerThread = new Thread(() => Mouse.MouseListener.Start(capturedScreenshotsList));
+                    //mouseListenerThread.IsBackground = true;
+                    Mouse.MouseListener.Start(capturedScreenshotsList);
+                    Mouse.MouseListener.Start();
+                    
+                }
             }
             else
             {
                 btnStartPause.Text = "Resume recording";
                 UpdateStatus("Recording paused.");
+
+                // Stop MouseListener only if running
+                Mouse.MouseListener.Stop();
+                if (mouseListenerThread != null && mouseListenerThread.IsAlive)
+                {
+                    mouseListenerThread.Join(500); // Optionally wait for thread to finish
+                    mouseListenerThread = null;
+                }
             }
             this.Invalidate(); // Force redraw to update border
         }

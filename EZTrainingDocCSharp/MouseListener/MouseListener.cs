@@ -1,97 +1,74 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Threading;
+﻿using Gma.System.MouseKeyHook;
+using System;
 using EZTrainingDocCSharp.ScreenCapture;
+using System.Windows.Forms;
+using System.Data;
+using System.Collections.Generic;
+using System.Drawing;
 
-namespace EZTrainingDocCSharp.MouseListener
+namespace EZTrainingDocCSharp.Mouse
 {
-    internal class MouseListener
+    public static class MouseListener
     {
-        private static LowLevelMouseProc _proc = HookCallback;
-        private static IntPtr _hookID = IntPtr.Zero;
+        private static IKeyboardMouseEvents _globalHook;
+        private static List<Bitmap> _capturedScreenshotsList;
+
+        // Start method only needs the screenshot list
+        public static void Start(List<Bitmap> capturedScreenshotsList)
+        {
+            _capturedScreenshotsList = capturedScreenshotsList;
+            Start();
+            
+        }
 
         public static void Start()
         {
-            _hookID = SetHook(_proc);
-            ApplicationRunLoop();
+            _globalHook = Hook.GlobalEvents();
+            _globalHook.MouseDownExt += GlobalHookMouseDownExt;
+            Console.WriteLine("Mouse listener started");
         }
 
         public static void Stop()
         {
-            UnhookWindowsHookEx(_hookID);
-        }
-
-        private static IntPtr SetHook(LowLevelMouseProc proc)
-        {
-            using (Process curProcess = Process.GetCurrentProcess())
-            using (ProcessModule curModule = curProcess.MainModule)
+            if (_globalHook != null)
             {
-                return SetWindowsHookEx(WH_MOUSE_LL, proc,
-                    GetModuleHandle(curModule.ModuleName), 0);
+                _globalHook.MouseDownExt -= GlobalHookMouseDownExt;
+                _globalHook.Dispose();
+                _globalHook = null;
+                Console.WriteLine("Mouse listener stopped");
             }
         }
 
-        private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
-
-        private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+        private static void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
         {
-            if (nCode >= 0)
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                int msg = wParam.ToInt32();
-                if (msg == WM_LBUTTONDOWN)
-                {
-                    OnLeftClick();
-                }
-                else if (msg == WM_RBUTTONDOWN)
-                {
-                    OnRightClick();
-                }
+                OnLeftClick();
             }
-            return CallNextHookEx(_hookID, nCode, wParam, lParam);
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                OnRightClick();
+            }
         }
-        
+
         private static void OnLeftClick()
         {
-            // FALTA CONECTAR LA CLASE DE PILLAR CLICK CON SACAR SCREENSHOT
-           // Console.WriteLine("Left mouse button clicked.");
-            //capturedScreenshotsList.Add(screenshot);
-            //UpdateStatus($"Screenshot #{capturedScreenshotsList.Count} captured and added to list.");
+            Console.WriteLine("Left click");
+            var screenshot = ScreenshotTaker.CaptureScreen();
+            if (screenshot != null && _capturedScreenshotsList != null)
+            {
+                _capturedScreenshotsList.Add(screenshot);
+            }
         }
 
         private static void OnRightClick()
         {
-            Console.WriteLine("Right mouse button clicked.");
-            // Your custom logic here
-        }
-
-        private static void ApplicationRunLoop()
-        {
-            // Simple loop to keep application running
-            while (true)
+            Console.WriteLine("Right click");
+            var screenshot = ScreenshotTaker.CaptureScreen();
+            if (screenshot != null && _capturedScreenshotsList != null)
             {
-                Thread.Sleep(100);
+                _capturedScreenshotsList.Add(screenshot);
             }
         }
-
-        private const int WH_MOUSE_LL = 14;
-        private const int WM_LBUTTONDOWN = 0x0201;
-        private const int WM_RBUTTONDOWN = 0x0204;
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int idHook,
-            LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode,
-            IntPtr wParam, IntPtr lParam);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr GetModuleHandle(string lpModuleName);
     }
 }
-
