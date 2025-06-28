@@ -41,6 +41,10 @@ namespace EZTrainingDocCSharp.Mouse
 
         private static void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
         {
+            int x = e.X; // Screen X coordinate
+            int y = e.Y; // Screen Y coordinate
+            Console.WriteLine($"Mouse click at screen coordinates: ({x}, {y})");
+
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 OnLeftClick();

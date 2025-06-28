@@ -86,8 +86,15 @@ namespace EZTrainingDocCSharp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            btnStartPause.Text = "Resume recording";
-            UpdateStatus("Recording paused.");
+            
+            if (isRecording)
+            {
+                isRecording = !isRecording;
+                btnStartPause.Text = "Resume recording";
+                UpdateStatus("Recording paused.");
+                this.Invalidate(); // Force redraw to update border
+            }
+     
 
             // Stop MouseListener only if running
             Mouse.MouseListener.Stop();
@@ -99,6 +106,7 @@ namespace EZTrainingDocCSharp
 
             var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
             previewForm.ShowDialog(this);
+            
         }
 
         private void btnStartPause_Click(object sender, EventArgs e)
