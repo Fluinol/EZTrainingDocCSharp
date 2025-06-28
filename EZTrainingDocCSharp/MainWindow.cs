@@ -22,8 +22,7 @@ namespace EZTrainingDocCSharp
         //private string selectedFolderPath = string.Empty;
         private string selectedFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         private List<Bitmap> capturedScreenshotsList = new List<Bitmap>();
-
- 
+        private bool isRecording = false;
 
         private void UpdateStatus(string message)
         {
@@ -79,17 +78,49 @@ namespace EZTrainingDocCSharp
         {
             var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
             previewForm.ShowDialog(this);
-        }
-
-        private void btnPause_Click(object sender, EventArgs e)
-        {
-
-        }
+        }   
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
             previewForm.ShowDialog(this);
+        }
+
+        private void btnStartPause_Click(object sender, EventArgs e)
+        {
+            isRecording = !isRecording;
+
+            if (isRecording)
+            {
+                btnStartPause.Text = "Pause";
+                UpdateStatus("Recording started.");
+                //add here the method to start capturing screenshots
+            }
+            else
+            {
+                btnStartPause.Text = "Resume recording";
+                UpdateStatus("Recording paused.");
+            }
+            this.Invalidate(); // Force redraw to update border
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (isRecording)
+            {
+                int borderWidth = 2;
+                using (Pen pen = new Pen(Color.Red, borderWidth))
+                {
+                    e.Graphics.DrawRectangle(
+                        pen,
+                        borderWidth / 2,
+                        borderWidth / 2,
+                        this.ClientSize.Width - borderWidth,
+                        this.ClientSize.Height - borderWidth
+                    );
+                }
+            }
         }
     }
 }

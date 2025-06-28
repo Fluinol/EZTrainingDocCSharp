@@ -108,7 +108,7 @@ namespace EZTrainingDocCSharp.WordEditing
                     noImg.Range.Text = "No screenshots captured.";
                     noImg.Range.InsertParagraphAfter();
                 }
-                string fileName = $"Report_{DateTime.Now:yyyyMMdd_HHmmss}.docx";
+                string fileName = $"EZ_Training_Doc_{DateTime.Now:yyyyMMdd_HHmmss}.docx";
                 object filePath = Path.Combine(outputFolder, fileName);
                 doc.SaveAs2(ref filePath);
                 return filePath.ToString();
