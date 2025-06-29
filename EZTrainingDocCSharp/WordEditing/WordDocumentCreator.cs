@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EZTrainingDocCSharp.ScreenCapture;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -12,7 +13,7 @@ namespace EZTrainingDocCSharp.WordEditing
     public class WordDocumentCreator
     {
         
-        public string Create(string outputFolder, List<Bitmap> screenshots)
+        public string Create(string outputFolder, List<ScreenshotInfo> screenshots)
         {
             Word.Application wordApp = null;
             Word.Document doc = null;
@@ -30,7 +31,7 @@ namespace EZTrainingDocCSharp.WordEditing
                     for (int i = 0; i < screenshots.Count; i++)
                     {
                         string imgPath = Path.Combine(Path.GetTempPath(), $"screenshot_{i}.png");
-                        screenshots[i].Save(imgPath, ImageFormat.Png);
+                        screenshots[i].Image.Save(imgPath, ImageFormat.Png);
 
                         // --- Navigation line ---
                         Word.Paragraph navPara = doc.Content.Paragraphs.Add();
@@ -87,7 +88,7 @@ namespace EZTrainingDocCSharp.WordEditing
 
                         // --- Description line ---
                         var stepDescriptionLine = doc.Content.Paragraphs.Add(ref missing);
-                        stepDescriptionLine.Range.Text = $"{i + 1}: AddDescriptionForScreenShotHere";
+                        stepDescriptionLine.Range.Text = $"{i + 1}: {screenshots[i].ClickType}. AddDescriptionHere";
                         stepDescriptionLine.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
                         stepDescriptionLine.Range.InsertParagraphAfter();
 

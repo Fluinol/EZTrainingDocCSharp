@@ -11,10 +11,10 @@ namespace EZTrainingDocCSharp.Mouse
     public static class MouseListener
     {
         private static IKeyboardMouseEvents _globalHook;
-        private static List<Bitmap> _capturedScreenshotsList;
+        private static List<ScreenshotInfo> _capturedScreenshotsList;
 
         // Start method only needs the screenshot list
-        public static void Start(List<Bitmap> capturedScreenshotsList)
+        public static void Start(List<ScreenshotInfo> capturedScreenshotsList)
         {
             _capturedScreenshotsList = capturedScreenshotsList;
             Start();
@@ -41,37 +41,41 @@ namespace EZTrainingDocCSharp.Mouse
 
         private static void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
         {
-            int x = e.X; // Screen X coordinate
-            int y = e.Y; // Screen Y coordinate
-            Console.WriteLine($"Mouse click at screen coordinates: ({x}, {y})");
-
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                OnLeftClick();
+                OnLeftClick(e.X, e.Y);
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                OnRightClick();
+                OnRightClick(e.X, e.Y);
             }
         }
 
-        private static void OnLeftClick()
+        private static void OnLeftClick(int x, int y)
         {
-            Console.WriteLine("Left click");
             var screenshot = ScreenshotTaker.CaptureScreen();
             if (screenshot != null && _capturedScreenshotsList != null)
             {
-                _capturedScreenshotsList.Add(screenshot);
+                _capturedScreenshotsList.Add(new ScreenshotInfo
+                {
+                    Image = screenshot,
+                    Coordinates = new System.Drawing.Point(x, y),
+                    ClickType = "left click"
+                });
             }
         }
 
-        private static void OnRightClick()
+        private static void OnRightClick(int x, int y)
         {
-            Console.WriteLine("Right click");
             var screenshot = ScreenshotTaker.CaptureScreen();
             if (screenshot != null && _capturedScreenshotsList != null)
             {
-                _capturedScreenshotsList.Add(screenshot);
+                _capturedScreenshotsList.Add(new ScreenshotInfo
+                {
+                    Image = screenshot,
+                    Coordinates = new System.Drawing.Point(x, y),
+                    ClickType = "right click"
+                });
             }
         }
     }

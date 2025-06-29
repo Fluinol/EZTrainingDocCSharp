@@ -87,6 +87,7 @@
     <Compile Include="MouseListener\MouseListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenCapture\ScreenshotInfo.cs" />
     <Compile Include="ScreenCapture\ScreenshotTaker.cs" />
     <Compile Include="ScreenshotPreviewForm.cs">
       <SubType>Form</SubType>

@@ -10,12 +10,12 @@ namespace EZTrainingDocCSharp
 {
     public partial class ScreenshotPreviewForm : Form
     {
-        private List<Bitmap> screenshots;
+        private List<ScreenshotInfo> screenshots;
         private List<CheckBox> checkBoxes = new List<CheckBox>();
         private string selectedFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-        public ScreenshotPreviewForm(List<Bitmap> _screenshots)
+        public ScreenshotPreviewForm(List<ScreenshotInfo> _screenshots)
         {
             InitializeComponent(); // Make sure this is called if you have a designer part
             this.screenshots = _screenshots;
@@ -45,7 +45,7 @@ namespace EZTrainingDocCSharp
 
                 var picBox = new PictureBox
                 {
-                    Image = new Bitmap(screenshots[i], new Size(120, 90)),
+                    Image = new Bitmap(screenshots[i].Image, new Size(120, 90)),
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Width = 120,
                     Height = 90,
@@ -101,7 +101,7 @@ namespace EZTrainingDocCSharp
             {
                 if (idx < screenshots.Count) // Ensure index is valid
                 {
-                    screenshots[idx].Dispose(); // Dispose the bitmap
+                    screenshots[idx].Image.Dispose(); // Dispose the bitmap
                     screenshots.RemoveAt(idx);
                 }
             }
@@ -133,9 +133,9 @@ namespace EZTrainingDocCSharp
                 return;
 
             // Dispose all bitmaps
-            foreach (var bmp in screenshots)
+            foreach (var info in screenshots)
             {
-                bmp.Dispose();
+                info.Image.Dispose();
             }
             screenshots.Clear();
             PopulateThumbnails();

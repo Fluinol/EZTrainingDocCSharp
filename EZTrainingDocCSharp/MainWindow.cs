@@ -22,7 +22,7 @@ namespace EZTrainingDocCSharp
 
         //private string selectedFolderPath = string.Empty;
         private string selectedFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        private List<Bitmap> capturedScreenshotsList = new List<Bitmap>();
+        private List<ScreenshotInfo> capturedScreenshotsList = new List<ScreenshotInfo>();
         private bool isRecording = false;
         private static Thread mouseListenerThread;        
         
@@ -38,12 +38,12 @@ namespace EZTrainingDocCSharp
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
-            var screenshot = ScreenshotTaker.CaptureScreen();
-            if (screenshot != null)
-            {                
-                capturedScreenshotsList.Add(screenshot);
-                UpdateStatus($"Screenshot #{capturedScreenshotsList.Count} captured and added to list.");
-            }
+            //var screenshot = ScreenshotTaker.CaptureScreen();
+            //if (screenshot != null)
+            //{
+            //    capturedScreenshotsList.Add(screenshot);
+            //    UpdateStatus($"Screenshot #{capturedScreenshotsList.Count} captured and added to list.");
+            //}
         }
 
         private void btnSaveToWord_Click(object sender, EventArgs e)
@@ -71,8 +71,8 @@ namespace EZTrainingDocCSharp
 
         private void btnnClearMemory_Click(object sender, EventArgs e)
         {
-            foreach (Bitmap bmp in capturedScreenshotsList)
-                bmp.Dispose();
+            foreach (var info in capturedScreenshotsList)
+                info.Image.Dispose();
 
             capturedScreenshotsList.Clear();
             UpdateStatus("Screenshot list cleared.");
@@ -161,7 +161,7 @@ namespace EZTrainingDocCSharp
                     );
                 }
             }
-        }
+        }      
     }
 }
 
