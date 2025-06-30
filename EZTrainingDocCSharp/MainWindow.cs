@@ -65,7 +65,7 @@ namespace EZTrainingDocCSharp
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
             {
                 selectedFolderPath = folderBrowserDialog1.SelectedPath;
-                lblSelectedFolder.Text = "Selected Folder: " + selectedFolderPath;
+               
             }
         }
 
@@ -75,7 +75,7 @@ namespace EZTrainingDocCSharp
                 info.Image.Dispose();
 
             capturedScreenshotsList.Clear();
-            UpdateStatus("Screenshot list cleared.");
+            
         }
 
         private void btnViewScreenhots_Click(object sender, EventArgs e)
@@ -90,8 +90,7 @@ namespace EZTrainingDocCSharp
             if (isRecording)
             {
                 isRecording = !isRecording;
-                btnStartPause.Text = "Resume recording";
-                UpdateStatus("Recording paused.");
+                btnStartPause.Text = "Resume recording";                
                 this.Invalidate(); // Force redraw to update border
             }
      
@@ -116,7 +115,7 @@ namespace EZTrainingDocCSharp
             if (isRecording)
             {
                 btnStartPause.Text = "Pause";
-                UpdateStatus("Recording started.");
+                
 
                 // Start MouseListener only if not already running
                 if (mouseListenerThread == null || !mouseListenerThread.IsAlive)
@@ -130,8 +129,7 @@ namespace EZTrainingDocCSharp
             }
             else
             {
-                btnStartPause.Text = "Resume recording";
-                UpdateStatus("Recording paused.");
+                btnStartPause.Text = "Resume recording";                
 
                 // Stop MouseListener only if running
                 Mouse.MouseListener.Stop();
