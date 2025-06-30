@@ -56,6 +56,11 @@ namespace EZTrainingDocCSharp.Mouse
             var screenshot = ScreenshotTaker.CaptureScreen();
             if (screenshot != null && _capturedScreenshotsList != null)
             {
+                using (Graphics g = Graphics.FromImage(screenshot))
+                {
+                    // Draw the system cursor at the click location (32x32 size, adjust as needed)
+                    Cursors.Default.Draw(g, new Rectangle(x, y, 32, 32));
+                }
                 _capturedScreenshotsList.Add(new ScreenshotInfo
                 {
                     Image = screenshot,
@@ -70,6 +75,11 @@ namespace EZTrainingDocCSharp.Mouse
             var screenshot = ScreenshotTaker.CaptureScreen();
             if (screenshot != null && _capturedScreenshotsList != null)
             {
+                using (Graphics g = Graphics.FromImage(screenshot))
+                {
+                    // Draw the system cursor at the click location (32x32 size, adjust as needed)
+                    Cursors.Default.Draw(g, new Rectangle(x, y, 32, 32));
+                }
                 _capturedScreenshotsList.Add(new ScreenshotInfo
                 {
                     Image = screenshot,
