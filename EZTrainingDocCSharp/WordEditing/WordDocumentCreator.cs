@@ -88,7 +88,7 @@ namespace EZTrainingDocCSharp.WordEditing
 
                         // --- Description line ---
                         var stepDescriptionLine = doc.Content.Paragraphs.Add(ref missing);
-                        stepDescriptionLine.Range.Text = $"{i + 1}: {screenshots[i].ClickType}. AddDescriptionHere";
+                        stepDescriptionLine.Range.Text = $"{i + 1}: {screenshots[i].ClickType}.AddDescriptionHere";
                         stepDescriptionLine.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
                         stepDescriptionLine.Range.InsertParagraphAfter();
 
