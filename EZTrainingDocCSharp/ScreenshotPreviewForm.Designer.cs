@@ -1,4 +1,6 @@
-﻿namespace EZTrainingDocCSharp
+﻿using System.Drawing;
+
+namespace EZTrainingDocCSharp
 {
     partial class ScreenshotPreviewForm
     {
@@ -29,74 +31,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScreenshotPreviewForm));
             this.actionButtonsPanel = new System.Windows.Forms.Panel();
+            this.chkSelectAll = new System.Windows.Forms.CheckBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnChange = new System.Windows.Forms.Button();
-            this.selectionControlPanel = new System.Windows.Forms.Panel();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.btnClear = new System.Windows.Forms.Button();
+            this.selectionControlPanel = new System.Windows.Forms.Panel();
             this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipScreenshotPrev = new System.Windows.Forms.ToolTip(this.components);
             this.actionButtonsPanel.SuspendLayout();
-            this.selectionControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionButtonsPanel
             // 
+            this.actionButtonsPanel.Controls.Add(this.chkSelectAll);
+            this.actionButtonsPanel.Controls.Add(this.btnDelete);
             this.actionButtonsPanel.Controls.Add(this.btnSave);
             this.actionButtonsPanel.Controls.Add(this.btnChange);
+            this.actionButtonsPanel.Controls.Add(this.btnClear);
             this.actionButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.actionButtonsPanel.Location = new System.Drawing.Point(0, 0);
             this.actionButtonsPanel.Name = "actionButtonsPanel";
-            this.actionButtonsPanel.Size = new System.Drawing.Size(800, 40);
+            this.actionButtonsPanel.Size = new System.Drawing.Size(800, 73);
             this.actionButtonsPanel.TabIndex = 0;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(139, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(130, 30);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Save to Word";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnChange
-            // 
-            this.btnChange.Location = new System.Drawing.Point(3, 3);
-            this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(130, 30);
-            this.btnChange.TabIndex = 0;
-            this.btnChange.Text = "Change";
-            this.btnChange.UseVisualStyleBackColor = true;
-            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
-            // 
-            // selectionControlPanel
-            // 
-            this.selectionControlPanel.Controls.Add(this.btnDelete);
-            this.selectionControlPanel.Controls.Add(this.chkSelectAll);
-            this.selectionControlPanel.Controls.Add(this.btnClear);
-            this.selectionControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.selectionControlPanel.Location = new System.Drawing.Point(0, 40);
-            this.selectionControlPanel.Name = "selectionControlPanel";
-            this.selectionControlPanel.Size = new System.Drawing.Size(800, 40);
-            this.selectionControlPanel.TabIndex = 1;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(316, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(130, 30);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete selection";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // chkSelectAll
             // 
             this.chkSelectAll.AutoSize = true;
-            this.chkSelectAll.Location = new System.Drawing.Point(164, 9);
+            this.chkSelectAll.Location = new System.Drawing.Point(165, 25);
             this.chkSelectAll.Name = "chkSelectAll";
             this.chkSelectAll.Size = new System.Drawing.Size(146, 20);
             this.chkSelectAll.TabIndex = 1;
@@ -104,25 +68,66 @@
             this.chkSelectAll.UseVisualStyleBackColor = true;
             this.chkSelectAll.CheckedChanged += new System.EventHandler(this.ChkSelectAll_CheckedChanged);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(317, 12);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(45, 45);
+            this.btnDelete.TabIndex = 2;
+            this.toolTipScreenshotPrev.SetToolTip(this.btnDelete, "Delete selected screenshots.");
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(63, 12);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(45, 45);
+            this.btnSave.TabIndex = 1;
+            this.toolTipScreenshotPrev.SetToolTip(this.btnSave, "Create Word document.");
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnChange
+            // 
+            this.btnChange.Image = ((System.Drawing.Image)(resources.GetObject("btnChange.Image")));
+            this.btnChange.Location = new System.Drawing.Point(12, 12);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(45, 45);
+            this.btnChange.TabIndex = 0;
+            this.toolTipScreenshotPrev.SetToolTip(this.btnChange, "Select folder to save.");
+            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
+            // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(3, 3);
+            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
+            this.btnClear.Location = new System.Drawing.Point(114, 12);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(130, 30);
+            this.btnClear.Size = new System.Drawing.Size(45, 45);
             this.btnClear.TabIndex = 0;
-            this.btnClear.Text = "Clear all";
+            this.toolTipScreenshotPrev.SetToolTip(this.btnClear, "Delete all screenshots.");
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // selectionControlPanel
+            // 
+            this.selectionControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.selectionControlPanel.Location = new System.Drawing.Point(0, 73);
+            this.selectionControlPanel.Name = "selectionControlPanel";
+            this.selectionControlPanel.Size = new System.Drawing.Size(800, 24);
+            this.selectionControlPanel.TabIndex = 1;
             // 
             // flowPanel
             // 
             this.flowPanel.AutoScroll = true;
             this.flowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowPanel.Location = new System.Drawing.Point(0, 80);
+            this.flowPanel.Location = new System.Drawing.Point(0, 97);
             this.flowPanel.Name = "flowPanel";
-            this.flowPanel.Size = new System.Drawing.Size(800, 370);
+            this.flowPanel.Size = new System.Drawing.Size(800, 353);
             this.flowPanel.TabIndex = 2;
-            
             // 
             // ScreenshotPreviewForm
             // 
@@ -135,12 +140,7 @@
             this.Name = "ScreenshotPreviewForm";
             this.Text = "ScreenshotPreviewForm";
             this.actionButtonsPanel.ResumeLayout(false);
-            this.selectionControlPanel.ResumeLayout(false);
-            this.selectionControlPanel.PerformLayout();
-            this.toolTipScreenshotPrev.SetToolTip(this.btnChange, "Select folder to save.");
-            this.toolTipScreenshotPrev.SetToolTip(this.btnSave, "Create Word document.");
-            this.toolTipScreenshotPrev.SetToolTip(this.btnClear, "Delete all screenshots.");
-            this.toolTipScreenshotPrev.SetToolTip(this.btnDelete, "Delete selected screenshots.");
+            this.actionButtonsPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }

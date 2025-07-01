@@ -28,25 +28,6 @@ namespace EZTrainingDocCSharp
         
         
 
-        public void UpdateStatus(string message)
-        {           
-            if (this.Controls.ContainsKey("lblStatus"))
-                this.Controls["lblStatus"].Text = message;
-            else
-                MessageBox.Show(message);
-        }
-
-        private void btnRecord_Click(object sender, EventArgs e)
-        {
-            //var screenshot = ScreenshotTaker.CaptureScreen();
-            //if (screenshot != null)
-            //{
-            //    capturedScreenshotsList.Add(screenshot);
-            //    UpdateStatus($"Screenshot #{capturedScreenshotsList.Count} captured and added to list.");
-            //}
-        }
-
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             
