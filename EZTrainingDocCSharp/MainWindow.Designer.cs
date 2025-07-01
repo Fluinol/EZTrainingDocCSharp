@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.btnStartPause = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipMainWindow = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnStartPause
@@ -42,6 +42,7 @@
             this.btnStartPause.Size = new System.Drawing.Size(130, 30);
             this.btnStartPause.TabIndex = 2;
             this.btnStartPause.Text = "Start recording";
+            this.toolTipMainWindow.SetToolTip(this.btnStartPause, "Start or pause the recording of screenshots.");
             this.btnStartPause.UseVisualStyleBackColor = true;
             this.btnStartPause.Click += new System.EventHandler(this.btnStartPause_Click);
             // 
@@ -52,6 +53,7 @@
             this.btnStop.Size = new System.Drawing.Size(130, 30);
             this.btnStop.TabIndex = 10;
             this.btnStop.Text = "Stop recording";
+            this.toolTipMainWindow.SetToolTip(this.btnStop, "Stop recording and preview the captured screenshots.");
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
@@ -66,8 +68,6 @@
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Ez training Doc BETA";
-            this.toolTip1.SetToolTip(this.btnStartPause, "Start or pause the recording of screenshots.");
-            this.toolTip1.SetToolTip(this.btnStop, "Stop recording and preview the captured screenshots.");
             this.ResumeLayout(false);
 
         }
@@ -75,7 +75,7 @@
         #endregion
         private System.Windows.Forms.Button btnStartPause;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTipMainWindow;
     }
 }
 

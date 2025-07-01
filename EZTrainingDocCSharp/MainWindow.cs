@@ -46,34 +46,6 @@ namespace EZTrainingDocCSharp
             //}
         }
 
-        private void btnSaveToWord_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(selectedFolderPath))
-            {
-                MessageBox.Show("Please select an output folder first.", "Folder Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var creator = new WordDocumentCreator();
-            //creator.Create(selectedFolderPath, capturedScreenshotsList, UpdateStatus);
-            creator.Create(selectedFolderPath, capturedScreenshotsList);
-        }
-
-
-        private void btnnClearMemory_Click(object sender, EventArgs e)
-        {
-            foreach (var info in capturedScreenshotsList)
-                info.Image.Dispose();
-
-            capturedScreenshotsList.Clear();
-            
-        }
-
-        private void btnViewScreenhots_Click(object sender, EventArgs e)
-        {
-            var previewForm = new ScreenshotPreviewForm(capturedScreenshotsList);
-            previewForm.ShowDialog(this);
-        }   
 
         private void btnStop_Click(object sender, EventArgs e)
         {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.actionButtonsPanel = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnChange = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.toolTipScreenshotPrev = new System.Windows.Forms.ToolTip(this.components);
             this.actionButtonsPanel.SuspendLayout();
             this.selectionControlPanel.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +122,7 @@
             this.flowPanel.Name = "flowPanel";
             this.flowPanel.Size = new System.Drawing.Size(800, 370);
             this.flowPanel.TabIndex = 2;
+            
             // 
             // ScreenshotPreviewForm
             // 
@@ -134,6 +137,10 @@
             this.actionButtonsPanel.ResumeLayout(false);
             this.selectionControlPanel.ResumeLayout(false);
             this.selectionControlPanel.PerformLayout();
+            this.toolTipScreenshotPrev.SetToolTip(this.btnChange, "Select folder to save.");
+            this.toolTipScreenshotPrev.SetToolTip(this.btnSave, "Create Word document.");
+            this.toolTipScreenshotPrev.SetToolTip(this.btnClear, "Delete all screenshots.");
+            this.toolTipScreenshotPrev.SetToolTip(this.btnDelete, "Delete selected screenshots.");
             this.ResumeLayout(false);
 
         }
@@ -148,6 +155,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.CheckBox chkSelectAll;
         private System.Windows.Forms.Button btnDelete;
-
+        private System.Windows.Forms.ToolTip toolTipScreenshotPrev;
     }
 }
