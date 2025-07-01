@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.btnStartPause = new System.Windows.Forms.Button();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btnStop = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnStartPause
@@ -43,10 +44,6 @@
             this.btnStartPause.Text = "Start recording";
             this.btnStartPause.UseVisualStyleBackColor = true;
             this.btnStartPause.Click += new System.EventHandler(this.btnStartPause_Click);
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.Description = "Please select a folder";
             // 
             // btnStop
             // 
@@ -69,14 +66,16 @@
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Ez training Doc BETA";
+            this.toolTip1.SetToolTip(this.btnStartPause, "Start or pause the recording of screenshots.");
+            this.toolTip1.SetToolTip(this.btnStop, "Stop recording and preview the captured screenshots.");
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Button btnStartPause;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

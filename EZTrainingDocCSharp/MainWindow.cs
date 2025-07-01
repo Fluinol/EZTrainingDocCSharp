@@ -59,15 +59,6 @@ namespace EZTrainingDocCSharp
             creator.Create(selectedFolderPath, capturedScreenshotsList);
         }
 
-        private void btnChangeFolder_Click(object sender, EventArgs e)
-        {
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
-            {
-                selectedFolderPath = folderBrowserDialog1.SelectedPath;
-               
-            }
-        }
 
         private void btnnClearMemory_Click(object sender, EventArgs e)
         {
@@ -159,7 +150,9 @@ namespace EZTrainingDocCSharp
                     );
                 }
             }
-        }      
+        }
+
+
     }
 }
 
