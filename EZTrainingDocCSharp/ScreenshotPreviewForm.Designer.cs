@@ -88,6 +88,9 @@ namespace EZTrainingDocCSharp
             this.btnSave.TabIndex = 1;
             this.toolTipScreenshotPrev.SetToolTip(this.btnSave, "Create Word document.");
             this.btnSave.UseVisualStyleBackColor = true;
+            var saveImage =global::EZTrainingDocCSharp.Properties.Resources.word48px.ToBitmap();
+            this.btnSave.Image = new Bitmap(saveImage, new Size(30, 30));            
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnChange

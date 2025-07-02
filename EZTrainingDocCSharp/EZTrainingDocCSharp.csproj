@@ -196,5 +196,20 @@
   <ItemGroup>
     <None Include="Resources\broom.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\record.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word48px.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause48px.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rec48px.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop48px.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

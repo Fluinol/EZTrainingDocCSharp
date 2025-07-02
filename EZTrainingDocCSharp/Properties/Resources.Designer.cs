@@ -103,6 +103,16 @@ namespace EZTrainingDocCSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon pause48px {
+            get {
+                object obj = ResourceManager.GetObject("pause48px", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon play {
             get {
                 object obj = ResourceManager.GetObject("play", resourceCulture);
@@ -123,6 +133,26 @@ namespace EZTrainingDocCSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon rec48px {
+            get {
+                object obj = ResourceManager.GetObject("rec48px", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon record {
+            get {
+                object obj = ResourceManager.GetObject("record", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon stop {
             get {
                 object obj = ResourceManager.GetObject("stop", resourceCulture);
@@ -133,9 +163,29 @@ namespace EZTrainingDocCSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon stop48px {
+            get {
+                object obj = ResourceManager.GetObject("stop48px", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon word {
             get {
                 object obj = ResourceManager.GetObject("word", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon word48px {
+            get {
+                object obj = ResourceManager.GetObject("word48px", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
