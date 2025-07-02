@@ -34,7 +34,10 @@ namespace EZTrainingDocCSharp
             if (isRecording)
             {
                 isRecording = !isRecording;
-                btnStartPause.Text = "Resume recording";                
+                //btnStartPause.Text = "Resume recording";
+                var recordImage = global::EZTrainingDocCSharp.Properties.Resources.rec48px.ToBitmap();
+                btnStartPause.Image = new Bitmap(recordImage, new Size(45, 45));
+                btnStartPause.ImageAlign = ContentAlignment.MiddleCenter;
                 this.Invalidate(); // Force redraw to update border
             }
      
@@ -58,8 +61,13 @@ namespace EZTrainingDocCSharp
 
             if (isRecording)
             {
-                btnStartPause.Text = "Pause";
-                
+                //btnStartPause.Text = "Pause";
+                var pauseImage=global::EZTrainingDocCSharp.Properties.Resources.pause48px.ToBitmap();
+                btnStartPause.Image = new Bitmap(pauseImage, new Size(45, 45));
+                btnStartPause.ImageAlign = ContentAlignment.MiddleCenter;
+
+
+
 
                 // Start MouseListener only if not already running
                 if (mouseListenerThread == null || !mouseListenerThread.IsAlive)
@@ -73,7 +81,10 @@ namespace EZTrainingDocCSharp
             }
             else
             {
-                btnStartPause.Text = "Resume recording";                
+                //btnStartPause.Text = "Resume recording";                
+                var recordImage = global::EZTrainingDocCSharp.Properties.Resources.rec48px.ToBitmap();
+                btnStartPause.Image = new Bitmap(recordImage, new Size(45, 45));
+                btnStartPause.ImageAlign = ContentAlignment.MiddleCenter;
 
                 // Stop MouseListener only if running
                 Mouse.MouseListener.Stop();

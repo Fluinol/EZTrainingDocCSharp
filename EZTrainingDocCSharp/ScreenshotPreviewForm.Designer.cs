@@ -70,13 +70,15 @@ namespace EZTrainingDocCSharp
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            var deleteImage = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.Location = new System.Drawing.Point(317, 12);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(45, 45);
             this.btnDelete.TabIndex = 2;
             this.toolTipScreenshotPrev.SetToolTip(this.btnDelete, "Delete selected screenshots.");
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Image = new Bitmap(deleteImage, new Size(45, 45));
+            this.btnDelete.ImageAlign = ContentAlignment.MiddleCenter;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // btnSave
@@ -102,6 +104,9 @@ namespace EZTrainingDocCSharp
             this.btnChange.TabIndex = 0;
             this.toolTipScreenshotPrev.SetToolTip(this.btnChange, "Select folder to save.");
             this.btnChange.UseVisualStyleBackColor = true;
+            var changeImage = global::EZTrainingDocCSharp.Properties.Resources.folder48px.ToBitmap();
+            btnChange.Image = new Bitmap(changeImage, new Size(30, 30));
+            btnChange.ImageAlign = ContentAlignment.MiddleCenter;
             this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
             // btnClear
