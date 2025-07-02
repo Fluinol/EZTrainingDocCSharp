@@ -1,10 +1,9 @@
-﻿using Gma.System.MouseKeyHook;
+﻿using EZTrainingDocCSharp.ScreenCapture;
+using Gma.System.MouseKeyHook;
 using System;
-using EZTrainingDocCSharp.ScreenCapture;
-using System.Windows.Forms;
-using System.Data;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace EZTrainingDocCSharp.Mouse
 {
@@ -18,7 +17,7 @@ namespace EZTrainingDocCSharp.Mouse
         {
             _capturedScreenshotsList = capturedScreenshotsList;
             Start();
-            
+
         }
 
         public static void Start()

@@ -1,7 +1,6 @@
 ﻿using EZTrainingDocCSharp.ScreenCapture;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -12,7 +11,7 @@ namespace EZTrainingDocCSharp.WordEditing
 {
     public class WordDocumentCreator
     {
-        
+
         public string Create(string outputFolder, List<ScreenshotInfo> screenshots)
         {
             Word.Application wordApp = null;
@@ -73,7 +72,7 @@ namespace EZTrainingDocCSharp.WordEditing
                             doc.Hyperlinks.Add(nextRange, SubAddress: $"Step_{(i + 2):D2}", TextToDisplay: nextText);
                         else
                             nextRange.Text = "End of the document";
-                            //nextRange.Text = $"Last (Step {i + 2:D2}) →";
+                        //nextRange.Text = $"Last (Step {i + 2:D2}) →";
 
                         // Align and break
                         navPara.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
@@ -83,7 +82,7 @@ namespace EZTrainingDocCSharp.WordEditing
                         var stepLine = doc.Content.Paragraphs.Add(ref missing);
                         stepLine.Range.set_Style(Word.WdBuiltinStyle.wdStyleHeading2);
                         stepLine.Range.Text = $"Step {i + 1}:";
-                        stepLine.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;                                          
+                        stepLine.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
                         stepLine.Range.InsertParagraphAfter();
 
                         // --- Description line ---

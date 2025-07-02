@@ -2,7 +2,6 @@
 using EZTrainingDocCSharp.WordEditing;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -22,14 +21,14 @@ namespace EZTrainingDocCSharp
             InitializeUI();
         }
 
-        
+
 
         private void InitializeUI()
         {
             this.Text = "Screenshot Previews";
             this.Width = 800;
             this.Height = 600;
-            this.StartPosition = FormStartPosition.CenterScreen;           
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             PopulateThumbnails();
         }
@@ -203,5 +202,5 @@ namespace EZTrainingDocCSharp
                 }
             }
         }
-            }
+    }
 }
