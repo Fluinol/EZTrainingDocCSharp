@@ -64,6 +64,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\video_camera_64px.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Gma.System.MouseKeyHook, Version=5.7.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MouseKeyHook.5.7.1\lib\net472\Gma.System.MouseKeyHook.dll</HintPath>
@@ -216,7 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE.txt" />
-    <None Include="Resources\video_camera_64px.ico" />
+    <Resource Include="Resources\video_camera_64px.ico" />
     <None Include="Resources\video_camera48px.ico" />
     <None Include="Resources\videocamera32px.ico" />
   </ItemGroup>

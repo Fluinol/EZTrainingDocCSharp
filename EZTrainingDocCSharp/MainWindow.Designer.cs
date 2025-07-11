@@ -66,7 +66,8 @@ namespace EZTrainingDocCSharp
             this.ClientSize = new System.Drawing.Size(451, 69);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStartPause);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = Properties.Resources.video_camera_64px;
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
