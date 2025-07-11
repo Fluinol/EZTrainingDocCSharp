@@ -183,6 +183,36 @@ namespace EZTrainingDocCSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon video_camera_64px {
+            get {
+                object obj = ResourceManager.GetObject("video_camera_64px", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon video_camera48px {
+            get {
+                object obj = ResourceManager.GetObject("video_camera48px", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon videocamera32px {
+            get {
+                object obj = ResourceManager.GetObject("videocamera32px", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon word {
             get {
                 object obj = ResourceManager.GetObject("word", resourceCulture);

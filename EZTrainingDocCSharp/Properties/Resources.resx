@@ -154,6 +154,15 @@
   <data name="stop48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stop48px.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="videocamera32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\videocamera32px.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="video_camera48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\video_camera48px.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="video_camera_64px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\video_camera_64px.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="word" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\word.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
