@@ -63,7 +63,7 @@ namespace EZTrainingDocCSharp.HTML
                         sb.AppendLine($"<div class='desc' contenteditable='true'>AddDescriptionHere</div>");
 
                         // Screenshot (embedded)
-                        sb.AppendLine($"<div class='screenshot'><img src='data:image/png;base64,{base64Image}' alt='Screenshot {i + 1}' style='max-width:100%;height:auto;'/></div>");
+                        sb.AppendLine($"<div class='screenshot'><img src='data:image/png;base64,{base64Image}' alt='Screenshot {i + 1}' style='max-width:75%;height:75%;'/></div>");
                         sb.AppendLine("<hr/>");
                     }
                 }
