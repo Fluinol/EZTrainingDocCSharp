@@ -32,10 +32,13 @@ namespace EZTrainingDocCSharp.HTML
                 {
                     for (int i = 0; i < screenshots.Count; i++)
                     {
-                        // Save image to output folder
-                        string imgFileName = $"screenshot_{i + 1}.png";
-                        string imgPath = Path.Combine(outputFolder, imgFileName);
-                        screenshots[i].Image.Save(imgPath, ImageFormat.Png);
+                        // Convert image to Base64
+                        string base64Image;
+                        using (var ms = new MemoryStream())
+                        {
+                            screenshots[i].Image.Save(ms, ImageFormat.Png);
+                            base64Image = Convert.ToBase64String(ms.ToArray());
+                        }
 
                         // Navigation
                         sb.AppendLine($"<div class='nav' id='nav_{i + 1}'>");
@@ -55,8 +58,8 @@ namespace EZTrainingDocCSharp.HTML
                         // Description (now editable)
                         sb.AppendLine($"<div class='desc' contenteditable='true'>AddDescriptionHere</div>");
 
-                        // Screenshot
-                        sb.AppendLine($"<div class='screenshot'><img src='{imgFileName}' alt='Screenshot {i + 1}' style='max-width:100%;height:auto;'/></div>");
+                        // Screenshot (embedded)
+                        sb.AppendLine($"<div class='screenshot'><img src='data:image/png;base64,{base64Image}' alt='Screenshot {i + 1}' style='max-width:100%;height:auto;'/></div>");
                         sb.AppendLine("<hr/>");
                     }
                 }
