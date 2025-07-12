@@ -23,7 +23,10 @@ namespace EZTrainingDocCSharp.HTML
                 sb.AppendLine(".desc { margin-bottom: 10px; }");
                 sb.AppendLine(".screenshot { margin-bottom: 30px; }");
                 sb.AppendLine("</style></head><body>");
-                sb.AppendLine($"<h1>Document Created: {DateTime.Now:yyyy-MM-dd HH:mm:ss}</h1>");
+                //Make title editable
+                sb.AppendLine("<h1 contenteditable='true'>EZ Training Document</h1>");
+                sb.AppendLine($"<h1 contenteditable='true'>Document Created: {DateTime.Now:yyyy-MM-dd HH:mm:ss}</h1>");
+                sb.AppendLine($"<h1 contenteditable='true'>Edit step description and CTRL+S (save HTML) locally</h1>");
 
                 if (screenshots.Count > 0)
                 {
@@ -37,20 +40,20 @@ namespace EZTrainingDocCSharp.HTML
                         // Navigation
                         sb.AppendLine($"<div class='nav' id='nav_{i + 1}'>");
                         if (i > 0)
-                            sb.AppendLine($"<a href='#step_{i}'>← Previous (Step {i:D2})</a> | ");
+                            sb.AppendLine($"<a href='#nav_{i}'>← Previous (Step {i:D2})</a> | ");
                         else
                             sb.AppendLine($"← Previous (Step 01) | ");
                         if (i < screenshots.Count - 1)
-                            sb.AppendLine($"<a href='#step_{i + 2}'>Next (Step {(i + 2):D2}) →</a>");
+                            sb.AppendLine($"<a href='#nav_{i + 2}'>Next (Step {(i + 2):D2}) →</a>");
                         else
                             sb.AppendLine("End of the document");
                         sb.AppendLine("</div>");
 
-                        // Step heading
-                        sb.AppendLine($"<div class='step' id='step_{i + 1}'>Step {i + 1}:</div>");
+                        // Step heading (no id here)
+                        sb.AppendLine($"<div class='step'>Step {i + 1}:</div>");
 
-                        // Description
-                        sb.AppendLine($"<div class='desc'>AddDescriptionHere</div>");
+                        // Description (now editable)
+                        sb.AppendLine($"<div class='desc' contenteditable='true'>AddDescriptionHere</div>");
 
                         // Screenshot
                         sb.AppendLine($"<div class='screenshot'><img src='{imgFileName}' alt='Screenshot {i + 1}' style='max-width:100%;height:auto;'/></div>");
