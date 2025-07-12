@@ -252,5 +252,10 @@ namespace EZTrainingDocCSharp
             }
 
         }
+
+        private void ScreenshotPreviewForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

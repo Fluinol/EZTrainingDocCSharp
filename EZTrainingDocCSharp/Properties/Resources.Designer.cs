@@ -103,6 +103,26 @@ namespace EZTrainingDocCSharp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon html32px {
+            get {
+                object obj = ResourceManager.GetObject("html32px", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon html48pc {
+            get {
+                object obj = ResourceManager.GetObject("html48pc", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon pause {
             get {
                 object obj = ResourceManager.GetObject("pause", resourceCulture);

@@ -33,6 +33,7 @@ namespace EZTrainingDocCSharp
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScreenshotPreviewForm));
             this.actionButtonsPanel = new System.Windows.Forms.Panel();
+            this.btnWebSave = new System.Windows.Forms.Button();
             this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@ namespace EZTrainingDocCSharp
             this.selectionControlPanel = new System.Windows.Forms.Panel();
             this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipScreenshotPrev = new System.Windows.Forms.ToolTip(this.components);
-            this.btnWebSave = new System.Windows.Forms.Button();
             this.actionButtonsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +58,17 @@ namespace EZTrainingDocCSharp
             this.actionButtonsPanel.Name = "actionButtonsPanel";
             this.actionButtonsPanel.Size = new System.Drawing.Size(800, 73);
             this.actionButtonsPanel.TabIndex = 0;
+            // 
+            // btnWebSave
+            // 
+            this.btnWebSave.Image = global::EZTrainingDocCSharp.Properties.Resources.html32px.ToBitmap();
+            this.btnWebSave.Location = new System.Drawing.Point(114, 12);
+            this.btnWebSave.Name = "btnWebSave";
+            this.btnWebSave.Size = new System.Drawing.Size(45, 45);
+            this.btnWebSave.TabIndex = 3;
+            this.toolTipScreenshotPrev.SetToolTip(this.btnWebSave, "Create HTML document.");
+            this.btnWebSave.UseVisualStyleBackColor = true;
+            this.btnWebSave.Click += new System.EventHandler(this.btnWebSave_Click);
             // 
             // chkSelectAll
             // 
@@ -131,17 +142,6 @@ namespace EZTrainingDocCSharp
             this.flowPanel.Size = new System.Drawing.Size(800, 353);
             this.flowPanel.TabIndex = 2;
             // 
-            // btnWebSave
-            // 
-            this.btnWebSave.Location = new System.Drawing.Point(114, 12);
-            this.btnWebSave.Name = "btnWebSave";
-            this.btnWebSave.Size = new System.Drawing.Size(45, 45);
-            this.btnWebSave.TabIndex = 3;
-            this.btnWebSave.Text = "HTML";
-            this.toolTipScreenshotPrev.SetToolTip(this.btnWebSave, "Create HTML document.");
-            this.btnWebSave.UseVisualStyleBackColor = true;
-            this.btnWebSave.Click += new System.EventHandler(this.btnWebSave_Click);
-            // 
             // ScreenshotPreviewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -150,8 +150,10 @@ namespace EZTrainingDocCSharp
             this.Controls.Add(this.flowPanel);
             this.Controls.Add(this.selectionControlPanel);
             this.Controls.Add(this.actionButtonsPanel);
+            this.Icon = global::EZTrainingDocCSharp.Properties.Resources.video_camera_64px;
             this.Name = "ScreenshotPreviewForm";
             this.Text = "ScreenshotPreviewForm";
+            this.Load += new System.EventHandler(this.ScreenshotPreviewForm_Load);
             this.actionButtonsPanel.ResumeLayout(false);
             this.actionButtonsPanel.PerformLayout();
             this.ResumeLayout(false);
