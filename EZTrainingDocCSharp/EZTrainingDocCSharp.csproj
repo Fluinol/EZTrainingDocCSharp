@@ -101,6 +101,7 @@
     <Compile Include="ScreenshotPreviewForm.Designer.cs">
       <DependentUpon>ScreenshotPreviewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HTML\HTMLCreator.cs" />
     <Compile Include="WordEditing\WordDocumentCreator.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

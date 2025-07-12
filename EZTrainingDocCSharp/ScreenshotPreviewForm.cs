@@ -1,5 +1,6 @@
 ﻿using EZTrainingDocCSharp.ScreenCapture;
 using EZTrainingDocCSharp.WordEditing;
+using EZTrainingDocCSharp.HTML;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -201,6 +202,55 @@ namespace EZTrainingDocCSharp
                     selectedFolderPath = dialog.SelectedPath;
                 }
             }
+        }
+
+        private void btnWebSave_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(selectedFolderPath))
+            {
+                MessageBox.Show("Please select an output folder first.", "Folder Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //Pending create Webcreator class
+            var creator = new HTMLCreator();
+            // Assume Create returns the file path of the created document
+            string docPath = creator.Create(selectedFolderPath, screenshots);
+
+            var result = MessageBox.Show(
+                "HTML document created successfully. Do you want to open it?", // Make the question clear
+                "Success",
+                MessageBoxButtons.YesNo, // This provides "Yes" and "No" buttons
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1 // Still makes "Yes" the default selected button
+            );
+
+            // If "Yes" is clicked, open the document
+            if (result == DialogResult.Yes && !string.IsNullOrEmpty(docPath))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(docPath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not open the document: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            // If "Open" is clicked (DialogResult.No if "Open" is the second button)
+            if (result == DialogResult.No && !string.IsNullOrEmpty(docPath))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(docPath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not open the document: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
         }
     }
 }

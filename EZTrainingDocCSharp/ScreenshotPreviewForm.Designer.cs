@@ -41,11 +41,13 @@ namespace EZTrainingDocCSharp
             this.selectionControlPanel = new System.Windows.Forms.Panel();
             this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipScreenshotPrev = new System.Windows.Forms.ToolTip(this.components);
+            this.btnWebSave = new System.Windows.Forms.Button();
             this.actionButtonsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionButtonsPanel
             // 
+            this.actionButtonsPanel.Controls.Add(this.btnWebSave);
             this.actionButtonsPanel.Controls.Add(this.chkSelectAll);
             this.actionButtonsPanel.Controls.Add(this.btnDelete);
             this.actionButtonsPanel.Controls.Add(this.btnSave);
@@ -60,7 +62,7 @@ namespace EZTrainingDocCSharp
             // chkSelectAll
             // 
             this.chkSelectAll.AutoSize = true;
-            this.chkSelectAll.Location = new System.Drawing.Point(165, 25);
+            this.chkSelectAll.Location = new System.Drawing.Point(216, 25);
             this.chkSelectAll.Name = "chkSelectAll";
             this.chkSelectAll.Size = new System.Drawing.Size(146, 20);
             this.chkSelectAll.TabIndex = 1;
@@ -70,15 +72,13 @@ namespace EZTrainingDocCSharp
             // 
             // btnDelete
             // 
-            var deleteImage = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(317, 12);
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(368, 12);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(45, 45);
             this.btnDelete.TabIndex = 2;
             this.toolTipScreenshotPrev.SetToolTip(this.btnDelete, "Delete selected screenshots.");
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Image = new Bitmap(deleteImage, new Size(45, 45));
-            this.btnDelete.ImageAlign = ContentAlignment.MiddleCenter;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // btnSave
@@ -90,9 +90,6 @@ namespace EZTrainingDocCSharp
             this.btnSave.TabIndex = 1;
             this.toolTipScreenshotPrev.SetToolTip(this.btnSave, "Create Word document.");
             this.btnSave.UseVisualStyleBackColor = true;
-            var saveImage =global::EZTrainingDocCSharp.Properties.Resources.word48px.ToBitmap();
-            this.btnSave.Image = new Bitmap(saveImage, new Size(30, 30));            
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnChange
@@ -104,15 +101,12 @@ namespace EZTrainingDocCSharp
             this.btnChange.TabIndex = 0;
             this.toolTipScreenshotPrev.SetToolTip(this.btnChange, "Select folder to save.");
             this.btnChange.UseVisualStyleBackColor = true;
-            var changeImage = global::EZTrainingDocCSharp.Properties.Resources.folder48px.ToBitmap();
-            btnChange.Image = new Bitmap(changeImage, new Size(30, 30));
-            btnChange.ImageAlign = ContentAlignment.MiddleCenter;
             this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
             // btnClear
             // 
             this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
-            this.btnClear.Location = new System.Drawing.Point(114, 12);
+            this.btnClear.Location = new System.Drawing.Point(165, 12);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(45, 45);
             this.btnClear.TabIndex = 0;
@@ -136,6 +130,17 @@ namespace EZTrainingDocCSharp
             this.flowPanel.Name = "flowPanel";
             this.flowPanel.Size = new System.Drawing.Size(800, 353);
             this.flowPanel.TabIndex = 2;
+            // 
+            // btnWebSave
+            // 
+            this.btnWebSave.Location = new System.Drawing.Point(114, 12);
+            this.btnWebSave.Name = "btnWebSave";
+            this.btnWebSave.Size = new System.Drawing.Size(45, 45);
+            this.btnWebSave.TabIndex = 3;
+            this.btnWebSave.Text = "HTML";
+            this.toolTipScreenshotPrev.SetToolTip(this.btnWebSave, "Create HTML document.");
+            this.btnWebSave.UseVisualStyleBackColor = true;
+            this.btnWebSave.Click += new System.EventHandler(this.btnWebSave_Click);
             // 
             // ScreenshotPreviewForm
             // 
@@ -164,5 +169,6 @@ namespace EZTrainingDocCSharp
         private System.Windows.Forms.CheckBox chkSelectAll;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ToolTip toolTipScreenshotPrev;
+        private System.Windows.Forms.Button btnWebSave;
     }
 }
