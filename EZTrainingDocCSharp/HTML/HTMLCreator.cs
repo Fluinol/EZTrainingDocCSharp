@@ -17,16 +17,18 @@ namespace EZTrainingDocCSharp.HTML
                 sb.AppendLine("<!DOCTYPE html>");
                 sb.AppendLine("<html><head><meta charset='UTF-8'><title>EZ Training Doc</title>");
                 sb.AppendLine("<style>");
-                sb.AppendLine("body { font-family: Arial, sans-serif; margin: 40px; }");
-                sb.AppendLine(".nav { text-align: right; margin-bottom: 10px; }");
-                sb.AppendLine(".step { font-size: 1.2em; font-weight: bold; margin-top: 30px; }");
-                sb.AppendLine(".desc { margin-bottom: 10px; }");
-                sb.AppendLine(".screenshot { margin-bottom: 30px; }");
+                sb.AppendLine("body { font-family: Arial, sans-serif; margin: 20px; }");
+                sb.AppendLine("h1 { margin-bottom: 10px; font-size: 2em; }");
+                sb.AppendLine("p { margin: 4px 0 8px 0; font-size: 1em; }");
+                sb.AppendLine(".nav { text-align: right; margin-bottom: 4px; margin-top: 4px; }");
+                sb.AppendLine(".step { font-size: 1.1em; font-weight: bold; margin-top: 10px; margin-bottom: 4px; }");
+                sb.AppendLine(".desc { margin-bottom: 4px; }");
+                sb.AppendLine(".screenshot { margin-bottom: 4px; }");
                 sb.AppendLine("</style></head><body>");
-                //Make title editable
+                // Title block
                 sb.AppendLine("<h1 contenteditable='true'>EZ Training Document</h1>");
-                sb.AppendLine($"<h1 contenteditable='true'>Document Created: {DateTime.Now:yyyy-MM-dd HH:mm:ss}</h1>");
-                sb.AppendLine($"<h1 contenteditable='true'>Edit step description and CTRL+S (save HTML) locally</h1>");
+                sb.AppendLine($"<p contenteditable='true'>Document Created: {DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>");
+                sb.AppendLine("<p contenteditable='true'>Edit step description and CTRL+S (save HTML) locally</p>");
 
                 if (screenshots.Count > 0)
                 {
@@ -45,7 +47,9 @@ namespace EZTrainingDocCSharp.HTML
                         if (i > 0)
                             sb.AppendLine($"<a href='#nav_{i}'>← Previous (Step {i:D2})</a> | ");
                         else
-                            sb.AppendLine($"← Previous (Step 01) | ");
+                            //add step 01 link 
+                            sb.AppendLine($"<a href='#nav_{1}'>← Previous (Step {1:D2})</a> | ");
+                        
                         if (i < screenshots.Count - 1)
                             sb.AppendLine($"<a href='#nav_{i + 2}'>Next (Step {(i + 2):D2}) →</a>");
                         else
