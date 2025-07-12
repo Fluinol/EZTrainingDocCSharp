@@ -3,6 +3,7 @@ using Gma.System.MouseKeyHook;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace EZTrainingDocCSharp.Mouse
@@ -53,6 +54,12 @@ namespace EZTrainingDocCSharp.Mouse
         private static void OnLeftClick(int x, int y)
         {
             var screenshot = ScreenshotTaker.CaptureScreen();
+            //save screenshot with timestamp into desktop folder for debugging purposes
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string screenshotPath = Path.Combine(desktopPath, $"screenshot_{timestamp}.png");
+            screenshot?.Save(screenshotPath, System.Drawing.Imaging.ImageFormat.Png);
+
             if (screenshot != null && _capturedScreenshotsList != null)
             {
                 using (Graphics g = Graphics.FromImage(screenshot))
