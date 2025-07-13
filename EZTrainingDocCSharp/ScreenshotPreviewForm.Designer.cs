@@ -58,13 +58,13 @@ namespace EZTrainingDocCSharp
             this.actionButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.actionButtonsPanel.Location = new System.Drawing.Point(0, 0);
             this.actionButtonsPanel.Name = "actionButtonsPanel";
-            this.actionButtonsPanel.Size = new System.Drawing.Size(800, 67);
+            this.actionButtonsPanel.Size = new System.Drawing.Size(800, 75);
             this.actionButtonsPanel.TabIndex = 0;
             // 
             // btnWebSave
             // 
             this.btnWebSave.Image = ((System.Drawing.Image)(resources.GetObject("btnWebSave.Image")));
-            this.btnWebSave.Location = new System.Drawing.Point(114, 12);
+            this.btnWebSave.Location = new System.Drawing.Point(114, 15);
             this.btnWebSave.Name = "btnWebSave";
             this.btnWebSave.Size = new System.Drawing.Size(45, 45);
             this.btnWebSave.TabIndex = 3;
@@ -75,7 +75,7 @@ namespace EZTrainingDocCSharp
             // chkSelectAll
             // 
             this.chkSelectAll.AutoSize = true;
-            this.chkSelectAll.Location = new System.Drawing.Point(216, 25);
+            this.chkSelectAll.Location = new System.Drawing.Point(235, 28);
             this.chkSelectAll.Name = "chkSelectAll";
             this.chkSelectAll.Size = new System.Drawing.Size(146, 20);
             this.chkSelectAll.TabIndex = 1;
@@ -86,7 +86,7 @@ namespace EZTrainingDocCSharp
             // btnDelete
             // 
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(368, 12);
+            this.btnDelete.Location = new System.Drawing.Point(387, 15);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(45, 45);
             this.btnDelete.TabIndex = 2;
@@ -97,7 +97,7 @@ namespace EZTrainingDocCSharp
             // btnSave
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.Location = new System.Drawing.Point(63, 12);
+            this.btnSave.Location = new System.Drawing.Point(66, 15);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(45, 45);
             this.btnSave.TabIndex = 1;
@@ -108,7 +108,7 @@ namespace EZTrainingDocCSharp
             // btnChange
             // 
             this.btnChange.Image = ((System.Drawing.Image)(resources.GetObject("btnChange.Image")));
-            this.btnChange.Location = new System.Drawing.Point(12, 12);
+            this.btnChange.Location = new System.Drawing.Point(15, 15);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(45, 45);
             this.btnChange.TabIndex = 0;
@@ -119,7 +119,7 @@ namespace EZTrainingDocCSharp
             // btnClear
             // 
             this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
-            this.btnClear.Location = new System.Drawing.Point(165, 12);
+            this.btnClear.Location = new System.Drawing.Point(184, 15);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(45, 45);
             this.btnClear.TabIndex = 0;
@@ -131,7 +131,7 @@ namespace EZTrainingDocCSharp
             // 
             this.selectionControlPanel.Controls.Add(this.lblPreviewExplanation);
             this.selectionControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.selectionControlPanel.Location = new System.Drawing.Point(0, 67);
+            this.selectionControlPanel.Location = new System.Drawing.Point(0, 75);
             this.selectionControlPanel.Name = "selectionControlPanel";
             this.selectionControlPanel.Size = new System.Drawing.Size(800, 24);
             this.selectionControlPanel.TabIndex = 1;
@@ -139,21 +139,22 @@ namespace EZTrainingDocCSharp
             // lblPreviewExplanation
             // 
             this.lblPreviewExplanation.AutoSize = true;
-            this.lblPreviewExplanation.Location = new System.Drawing.Point(4, 5);
+            this.lblPreviewExplanation.Location = new System.Drawing.Point(12, 3);
             this.lblPreviewExplanation.Name = "lblPreviewExplanation";
-            this.lblPreviewExplanation.Size = new System.Drawing.Size(643, 16);
+            this.lblPreviewExplanation.Size = new System.Drawing.Size(621, 16);
             this.lblPreviewExplanation.TabIndex = 0;
-            this.lblPreviewExplanation.Text = "Double click on thumbnail to open detailed view. Key arrows to move throw list an" +
-    "d delete button for deletion.";
+            this.lblPreviewExplanation.Text = "Double click on thumbnail to open detailed view. Keyboard arrows andd delete butt" +
+    "on to move or delete.";
             this.lblPreviewExplanation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPreviewExplanation.Click += new System.EventHandler(this.lblPreviewExplanation_Click);
             // 
             // flowPanel
             // 
             this.flowPanel.AutoScroll = true;
             this.flowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowPanel.Location = new System.Drawing.Point(0, 91);
+            this.flowPanel.Location = new System.Drawing.Point(0, 99);
             this.flowPanel.Name = "flowPanel";
-            this.flowPanel.Size = new System.Drawing.Size(800, 359);
+            this.flowPanel.Size = new System.Drawing.Size(800, 351);
             this.flowPanel.TabIndex = 2;
             // 
             // ScreenshotPreviewForm
