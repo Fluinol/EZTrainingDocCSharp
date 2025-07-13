@@ -169,6 +169,7 @@ namespace EZTrainingDocCSharp
             this.Name = "ScreenshotPreviewForm";
             this.Text = "ScreenshotPreviewForm";
             this.Load += new System.EventHandler(this.ScreenshotPreviewForm_Load);
+            this.Activated += new System.EventHandler(this.ScreenshotPreviewForm_Activated);
             this.actionButtonsPanel.ResumeLayout(false);
             this.actionButtonsPanel.PerformLayout();
             this.selectionControlPanel.ResumeLayout(false);

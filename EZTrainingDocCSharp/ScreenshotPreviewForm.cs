@@ -76,25 +76,8 @@ namespace EZTrainingDocCSharp
         {
             if (sender is PictureBox picBox && picBox.Tag is int index)
             {
-                // Prepare file paths for ScreenshotViewerForm
-                var screenshotPaths = new List<string>();
-                foreach (var info in screenshots)
-                {
-                    // Save each Bitmap to a temporary file if needed, or use a file path property if available
-                    // For demonstration, let's save to temp files
-                    string tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".png");
-                    info.Image.Save(tempPath, System.Drawing.Imaging.ImageFormat.Png);
-                    screenshotPaths.Add(tempPath);
-                }
-
-                var viewer = new ScreenshotViewerForm(screenshotPaths, index);
+                var viewer = new ScreenshotViewerForm(screenshots, index);
                 viewer.ShowDialog();
-
-                // Optionally, clean up temp files after viewing
-                foreach (var path in screenshotPaths)
-                {
-                    try { if (File.Exists(path)) File.Delete(path); } catch { }
-                }
             }
         }
 
@@ -290,6 +273,11 @@ namespace EZTrainingDocCSharp
         private void lblPreviewExplanation_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ScreenshotPreviewForm_Activated(object sender, EventArgs e)
+        {
+            PopulateThumbnails();
         }
     }
 }

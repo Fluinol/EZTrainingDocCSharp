@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using EZTrainingDocCSharp.ScreenCapture;
 
 public class ScreenshotViewerForm : Form
 {
-    private List<string> _screenshotPaths;
+    private List<ScreenshotInfo> _screenshots;
     private int _currentIndex;
     private PictureBox _pictureBox;
 
-    public ScreenshotViewerForm(List<string> screenshotPaths, int startIndex)
+    public ScreenshotViewerForm(List<ScreenshotInfo> screenshots, int startIndex)
     {
-        _screenshotPaths = screenshotPaths ?? throw new ArgumentNullException(nameof(screenshotPaths));
+        _screenshots = screenshots ?? throw new ArgumentNullException(nameof(screenshots));
         _currentIndex = startIndex;
         InitializeComponents();
         LoadScreenshot();
@@ -38,35 +39,24 @@ public class ScreenshotViewerForm : Form
 
     private void LoadScreenshot()
     {
-        if (_screenshotPaths.Count == 0 || _currentIndex < 0 || _currentIndex >= _screenshotPaths.Count)
+        if (_screenshots.Count == 0 || _currentIndex < 0 || _currentIndex >= _screenshots.Count)
         {
             _pictureBox.Image = null;
             this.Text = "Screenshot Viewer";
             return;
         }
 
-        string path = _screenshotPaths[_currentIndex];
-        if (File.Exists(path))
-        {
-            using (var img = Image.FromFile(path))
-            {
-                _pictureBox.Image?.Dispose();
-                _pictureBox.Image = new Bitmap(img);
-            }
-            this.Text = $"Screenshot Viewer ({_currentIndex + 1}/{_screenshotPaths.Count})";
-        }
-        else
-        {
-            _pictureBox.Image = null;
-            this.Text = "Screenshot not found";
-        }
+        var info = _screenshots[_currentIndex];
+        _pictureBox.Image?.Dispose();
+        _pictureBox.Image = new Bitmap(info.Image);
+        this.Text = $"Screenshot Viewer ({_currentIndex + 1}/{_screenshots.Count})";
     }
 
     private void ScreenshotViewerForm_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Right)
         {
-            if (_currentIndex < _screenshotPaths.Count - 1)
+            if (_currentIndex < _screenshots.Count - 1)
             {
                 _currentIndex++;
                 LoadScreenshot();
@@ -82,19 +72,14 @@ public class ScreenshotViewerForm : Form
         }
         else if (e.KeyCode == Keys.Delete)
         {
-            if (_screenshotPaths.Count > 0)
+            if (_screenshots.Count > 0)
             {
-                string toDelete = _screenshotPaths[_currentIndex];
-                _screenshotPaths.RemoveAt(_currentIndex);
-                try
-                {
-                    if (File.Exists(toDelete))
-                        File.Delete(toDelete);
-                }
-                catch { /* Handle exceptions as needed */ }
+                var toDelete = _screenshots[_currentIndex];
+                toDelete.Image.Dispose();
+                _screenshots.RemoveAt(_currentIndex);
 
-                if (_currentIndex >= _screenshotPaths.Count)
-                    _currentIndex = _screenshotPaths.Count - 1;
+                if (_currentIndex >= _screenshots.Count)
+                    _currentIndex = _screenshots.Count - 1;
 
                 LoadScreenshot();
             }
