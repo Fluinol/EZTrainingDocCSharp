@@ -4,6 +4,7 @@ using EZTrainingDocCSharp.HTML;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace EZTrainingDocCSharp
@@ -49,23 +50,51 @@ namespace EZTrainingDocCSharp
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Width = 120,
                     Height = 90,
-                    Top = 10, // Added some top margin
-                    Left = (panel.Width - 120) / 2 // Center horizontally
+                    Top = 10,
+                    Left = (panel.Width - 120) / 2,
+                    Tag = i // Store the index for reference in the event handler
                 };
+                picBox.DoubleClick += PicBox_DoubleClick; // Attach double-click event
                 panel.Controls.Add(picBox);
 
                 var checkBox = new CheckBox
                 {
                     Text = $"Screenshot {i + 1}",
-                    Top = picBox.Bottom + 10, // Position below picture box
+                    Top = picBox.Bottom + 10,
                     Left = 10,
-                    Width = panel.Width - 20, // Adjust width
+                    Width = panel.Width - 20,
                     TextAlign = ContentAlignment.MiddleLeft
                 };
                 panel.Controls.Add(checkBox);
                 checkBoxes.Add(checkBox);
 
                 flowPanel.Controls.Add(panel);
+            }
+        }
+
+        private void PicBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (sender is PictureBox picBox && picBox.Tag is int index)
+            {
+                // Prepare file paths for ScreenshotViewerForm
+                var screenshotPaths = new List<string>();
+                foreach (var info in screenshots)
+                {
+                    // Save each Bitmap to a temporary file if needed, or use a file path property if available
+                    // For demonstration, let's save to temp files
+                    string tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".png");
+                    info.Image.Save(tempPath, System.Drawing.Imaging.ImageFormat.Png);
+                    screenshotPaths.Add(tempPath);
+                }
+
+                var viewer = new ScreenshotViewerForm(screenshotPaths, index);
+                viewer.ShowDialog();
+
+                // Optionally, clean up temp files after viewing
+                foreach (var path in screenshotPaths)
+                {
+                    try { if (File.Exists(path)) File.Delete(path); } catch { }
+                }
             }
         }
 
@@ -254,6 +283,11 @@ namespace EZTrainingDocCSharp
         }
 
         private void ScreenshotPreviewForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPreviewExplanation_Click(object sender, EventArgs e)
         {
 
         }

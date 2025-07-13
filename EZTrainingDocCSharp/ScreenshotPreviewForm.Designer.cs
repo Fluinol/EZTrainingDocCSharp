@@ -40,9 +40,11 @@ namespace EZTrainingDocCSharp
             this.btnChange = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.selectionControlPanel = new System.Windows.Forms.Panel();
+            this.lblPreviewExplanation = new System.Windows.Forms.Label();
             this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipScreenshotPrev = new System.Windows.Forms.ToolTip(this.components);
             this.actionButtonsPanel.SuspendLayout();
+            this.selectionControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionButtonsPanel
@@ -56,12 +58,12 @@ namespace EZTrainingDocCSharp
             this.actionButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.actionButtonsPanel.Location = new System.Drawing.Point(0, 0);
             this.actionButtonsPanel.Name = "actionButtonsPanel";
-            this.actionButtonsPanel.Size = new System.Drawing.Size(800, 73);
+            this.actionButtonsPanel.Size = new System.Drawing.Size(800, 67);
             this.actionButtonsPanel.TabIndex = 0;
             // 
             // btnWebSave
             // 
-            this.btnWebSave.Image = global::EZTrainingDocCSharp.Properties.Resources.html32px.ToBitmap();
+            this.btnWebSave.Image = ((System.Drawing.Image)(resources.GetObject("btnWebSave.Image")));
             this.btnWebSave.Location = new System.Drawing.Point(114, 12);
             this.btnWebSave.Name = "btnWebSave";
             this.btnWebSave.Size = new System.Drawing.Size(45, 45);
@@ -127,19 +129,31 @@ namespace EZTrainingDocCSharp
             // 
             // selectionControlPanel
             // 
+            this.selectionControlPanel.Controls.Add(this.lblPreviewExplanation);
             this.selectionControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.selectionControlPanel.Location = new System.Drawing.Point(0, 73);
+            this.selectionControlPanel.Location = new System.Drawing.Point(0, 67);
             this.selectionControlPanel.Name = "selectionControlPanel";
             this.selectionControlPanel.Size = new System.Drawing.Size(800, 24);
             this.selectionControlPanel.TabIndex = 1;
+            // 
+            // lblPreviewExplanation
+            // 
+            this.lblPreviewExplanation.AutoSize = true;
+            this.lblPreviewExplanation.Location = new System.Drawing.Point(4, 5);
+            this.lblPreviewExplanation.Name = "lblPreviewExplanation";
+            this.lblPreviewExplanation.Size = new System.Drawing.Size(643, 16);
+            this.lblPreviewExplanation.TabIndex = 0;
+            this.lblPreviewExplanation.Text = "Double click on thumbnail to open detailed view. Key arrows to move throw list an" +
+    "d delete button for deletion.";
+            this.lblPreviewExplanation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowPanel
             // 
             this.flowPanel.AutoScroll = true;
             this.flowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowPanel.Location = new System.Drawing.Point(0, 97);
+            this.flowPanel.Location = new System.Drawing.Point(0, 91);
             this.flowPanel.Name = "flowPanel";
-            this.flowPanel.Size = new System.Drawing.Size(800, 353);
+            this.flowPanel.Size = new System.Drawing.Size(800, 359);
             this.flowPanel.TabIndex = 2;
             // 
             // ScreenshotPreviewForm
@@ -156,6 +170,8 @@ namespace EZTrainingDocCSharp
             this.Load += new System.EventHandler(this.ScreenshotPreviewForm_Load);
             this.actionButtonsPanel.ResumeLayout(false);
             this.actionButtonsPanel.PerformLayout();
+            this.selectionControlPanel.ResumeLayout(false);
+            this.selectionControlPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -172,5 +188,6 @@ namespace EZTrainingDocCSharp
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ToolTip toolTipScreenshotPrev;
         private System.Windows.Forms.Button btnWebSave;
+        private System.Windows.Forms.Label lblPreviewExplanation;
     }
 }
