@@ -35,6 +35,7 @@ namespace EZTrainingDocCSharp
             this.btnStartPause = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.toolTipMainWindow = new System.Windows.Forms.ToolTip(this.components);
+            this.btnDonate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStartPause
@@ -59,15 +60,25 @@ namespace EZTrainingDocCSharp
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
+            // btnDonate
+            // 
+            this.btnDonate.Location = new System.Drawing.Point(364, 13);
+            this.btnDonate.Name = "btnDonate";
+            this.btnDonate.Size = new System.Drawing.Size(75, 44);
+            this.btnDonate.TabIndex = 11;
+            this.btnDonate.Text = "Donate";
+            this.btnDonate.UseVisualStyleBackColor = true;
+            this.btnDonate.Click += new System.EventHandler(this.btnDonate_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 69);
+            this.Controls.Add(this.btnDonate);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStartPause);
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Icon = Properties.Resources.video_camera_64px;
+            this.Icon = global::EZTrainingDocCSharp.Properties.Resources.video_camera_64px;
             this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -81,5 +92,6 @@ namespace EZTrainingDocCSharp
         private System.Windows.Forms.Button btnStartPause;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.ToolTip toolTipMainWindow;
+        private System.Windows.Forms.Button btnDonate;
     }
 }

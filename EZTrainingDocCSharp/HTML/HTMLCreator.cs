@@ -24,11 +24,33 @@ namespace EZTrainingDocCSharp.HTML
                 sb.AppendLine(".step { font-size: 1.1em; font-weight: bold; margin-top: 10px; margin-bottom: 4px; }");
                 sb.AppendLine(".desc { margin-bottom: 4px; }");
                 sb.AppendLine(".screenshot { margin-bottom: 4px; }");
-                sb.AppendLine("</style></head><body>");
-                // Title block
-                sb.AppendLine("<h1 contenteditable='true'>EZ Training Document</h1>");
+                sb.AppendLine("</style>");
+                sb.AppendLine(@"<script>
+function saveHTML() {
+    var htmlContent = document.documentElement.outerHTML;
+    var blob = new Blob([htmlContent], {type: 'text/html'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'EZ_Training_Doc_Edited.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+</script>");
+                sb.AppendLine("</head><body>");
+
+                // Add logo and title block
+                sb.AppendLine("<div style='display:flex;align-items:center;margin-bottom:10px;'>");
+                sb.AppendLine("<img src='https://yourcompany.com/logo.png' alt='Company Logo' style='height:48px;margin-right:16px;'/>");
+                sb.AppendLine("<h1 contenteditable='true' style='margin:0;'>EZ Training Document</h1>");
+                sb.AppendLine("</div>");
                 sb.AppendLine($"<p contenteditable='true'>Document Created: {DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>");
-                sb.AppendLine("<p contenteditable='true'>Edit step description and CTRL+S (save HTML) locally</p>");
+                sb.AppendLine("<p contenteditable='true'>Edit title and step description and click 'Save HTML' to download saved version</p>");
+
+                // Move the Save button below the edit instructions, aligned left
+                sb.AppendLine("<div style='margin:12px 0;text-align:left;'>");
+                sb.AppendLine("<button onclick='saveHTML()'>Save HTML</button>");
+                sb.AppendLine("</div>");
 
                 if (screenshots.Count > 0)
                 {

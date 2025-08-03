@@ -138,6 +138,18 @@ namespace EZTrainingDocCSharp
         {
 
         }
+
+        private void btnDonate_Click(object sender, EventArgs e)
+        {
+            string message =
+                "If you find this software useful, consider supporting its development and existance :\n\n" +
+                "PayPal: https://www.paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID\n" +
+                //"Patreon: https://www.patreon.com/YOUR_PROFILE\n" +
+                //"Buy Me a Coffee: https://www.buymeacoffee.com/YOUR_PROFILE\n" +
+                //"GitHub Sponsors: https://github.com/sponsors/YOUR_PROFILE\n\n" +
+                "Thank you for your support!";
+            MessageBox.Show(message, "Support Development", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
 
