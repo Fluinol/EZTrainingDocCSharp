@@ -14,14 +14,17 @@ public class ScreenshotViewerForm : Form
     private Button _clearRectButton;
     private Button _clearAllButton;
 
+
     private bool isDrawing = false;
     private Point startPoint;
     private Rectangle currentRect;
+    private Bitmap _originalScreenshot;
 
     public ScreenshotViewerForm(List<ScreenshotInfo> screenshots, int startIndex)
     {
         _screenshots = screenshots ?? throw new ArgumentNullException(nameof(screenshots));
         _currentIndex = startIndex;
+        _originalScreenshot = new Bitmap(_screenshots[_currentIndex].Image);
         InitializeComponents();
         LoadScreenshot();
     }
@@ -34,47 +37,61 @@ public class ScreenshotViewerForm : Form
         this.KeyPreview = true;
         this.StartPosition = FormStartPosition.CenterScreen;
 
+        // Create a top panel for buttons
+        var topPanel = new Panel
+        {
+            Dock = DockStyle.Top,
+            Height = 44,
+            Padding = new Padding(4),
+            BackColor = Color.LightGray
+        };
+        this.Controls.Add(topPanel);
+
+        // Save button
+        _saveButton = new Button
+        {
+            Text = "Save changes",
+            Width = 140,
+            Height = 36,
+            Margin = new Padding(4, 4, 4, 4)
+        };
+        _saveButton.Click += SaveButton_Click;
+        topPanel.Controls.Add(_saveButton);
+
+        // Clear Rectangle button
+        _clearRectButton = new Button
+        {
+            Text = "Clear Rectangle",
+            Width = 140,
+            Height = 36,
+            Margin = new Padding(4, 4, 4, 4)
+        };
+        _clearRectButton.Click += ClearRectButton_Click;
+        topPanel.Controls.Add(_clearRectButton);
+
+        // Clear All Changes button
+        _clearAllButton = new Button
+        {
+            Text = "Clear All Changes",
+            Width = 140,
+            Height = 36,
+            Margin = new Padding(4, 4, 4, 4)
+        };
+        _clearAllButton.Click += ClearAllButton_Click;
+        topPanel.Controls.Add(_clearAllButton);
+
+        // Arrange buttons left to right
+        foreach (Control btn in topPanel.Controls)
+        {
+            btn.Dock = DockStyle.Left;
+        }
+
         _pictureBox = new PictureBox
         {
             Dock = DockStyle.Fill,
             SizeMode = PictureBoxSizeMode.Zoom
         };
         this.Controls.Add(_pictureBox);
-
-        // Add Save button
-        _saveButton = new Button
-        {
-            Text = "Save changes",
-            Dock = DockStyle.Top,
-            Height = 40
-        };
-        _saveButton.Click += SaveButton_Click;
-        this.Controls.Add(_saveButton);
-
-        // Add Clear Rectangle button
-        _clearRectButton = new Button
-        {
-            Text = "Clear Rectangle",
-            Dock = DockStyle.Top,
-            Height = 40
-        };
-        _clearRectButton.Click += ClearRectButton_Click;
-        this.Controls.Add(_clearRectButton);
-
-        // Add Clear All Changes button
-        _clearAllButton = new Button
-        {
-            Text = "Clear All Changes",
-            Dock = DockStyle.Top,
-            Height = 40
-        };
-        _clearAllButton.Click += ClearAllButton_Click;
-        this.Controls.Add(_clearAllButton);
-        this.Controls.SetChildIndex(_clearAllButton, 0); // Ensure it's at the top
-
-        // Ensure buttons are at the top in the correct order
-        this.Controls.SetChildIndex(_clearRectButton, 1);
-        this.Controls.SetChildIndex(_saveButton, 2);
 
         this.KeyDown += ScreenshotViewerForm_KeyDown;
 
@@ -96,7 +113,19 @@ public class ScreenshotViewerForm : Form
         var info = _screenshots[_currentIndex];
         _pictureBox.Image?.Dispose();
         _pictureBox.Image = new Bitmap(info.Image);
+
         this.Text = $"Screenshot Viewer ({_currentIndex + 1}/{_screenshots.Count})";
+    }
+
+    private void SetCurrentScreenshot(int newIndex)
+    {
+        if (newIndex < 0 || newIndex >= _screenshots.Count)
+            return;
+
+        _currentIndex = newIndex;
+        _originalScreenshot?.Dispose();
+        _originalScreenshot = new Bitmap(_screenshots[_currentIndex].Image);
+        LoadScreenshot();
     }
 
     private void ScreenshotViewerForm_KeyDown(object sender, KeyEventArgs e)
@@ -105,31 +134,35 @@ public class ScreenshotViewerForm : Form
         {
             if (_currentIndex < _screenshots.Count - 1)
             {
-                _currentIndex++;
-                LoadScreenshot();
+                SetCurrentScreenshot(_currentIndex + 1);
             }
         }
         else if (e.KeyCode == Keys.Left)
         {
             if (_currentIndex > 0)
             {
-                _currentIndex--;
-                LoadScreenshot();
+                SetCurrentScreenshot(_currentIndex - 1);
             }
         }
         else if (e.KeyCode == Keys.Delete)
         {
-            if (_screenshots.Count > 0)
+            // Add confirmation dialog before deletion
+            var result = MessageBox.Show("Are you sure you want to delete this screenshot?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-                var toDelete = _screenshots[_currentIndex];
-                toDelete.Image.Dispose();
-                _screenshots.RemoveAt(_currentIndex);
+                if (_screenshots.Count > 0)
+                {
+                    var toDelete = _screenshots[_currentIndex];
+                    toDelete.Image.Dispose();
+                    _screenshots.RemoveAt(_currentIndex);
 
-                if (_currentIndex >= _screenshots.Count)
-                    _currentIndex = _screenshots.Count - 1;
+                    if (_currentIndex >= _screenshots.Count)
+                        _currentIndex = _screenshots.Count - 1;
 
-                LoadScreenshot();
-            }
+                    LoadScreenshot();
+                }
+            }           
+           
         }
     }
 
@@ -228,17 +261,15 @@ public class ScreenshotViewerForm : Form
 
     private void ClearAllButton_Click(object sender, EventArgs e)
     {
-        if (_screenshots.Count == 0 || _currentIndex < 0)
+        if (_screenshots.Count == 0 || _currentIndex < 0 || _originalScreenshot == null)
             return;
 
-        var info = _screenshots[_currentIndex];
-        if (info.OriginalImage != null)
-        {
-            info.Image.Dispose();
-            info.Image = new Bitmap(info.OriginalImage); // Clone to avoid reference issues
-            currentRect = Rectangle.Empty;
-            LoadScreenshot();
-        }
+
+        _screenshots[_currentIndex].Image.Dispose();
+        _screenshots[_currentIndex].Image = new Bitmap(_originalScreenshot); // This is safe if _originalScreenshot is valid
+
+        currentRect = Rectangle.Empty;
+        LoadScreenshot();
     }
 
     // Helper to get the image rectangle inside the PictureBox (for Zoom mode)
@@ -257,5 +288,10 @@ public class ScreenshotViewerForm : Form
         int x = (pbWidth - width) / 2;
         int y = (pbHeight - height) / 2;
         return new Rectangle(x, y, width, height);
+    }
+    private void saveOriginalScreenshot(Bitmap screenshot)
+    {
+        _originalScreenshot?.Dispose();
+        _originalScreenshot = new Bitmap(screenshot); // This clones the bitmap
     }
 }
