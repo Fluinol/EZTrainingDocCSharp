@@ -10,6 +10,13 @@ public class ScreenshotViewerForm : Form
     private List<ScreenshotInfo> _screenshots;
     private int _currentIndex;
     private PictureBox _pictureBox;
+    private Button _saveButton;
+    private Button _clearRectButton;
+    private Button _clearAllButton;
+
+    private bool isDrawing = false;
+    private Point startPoint;
+    private Rectangle currentRect;
 
     public ScreenshotViewerForm(List<ScreenshotInfo> screenshots, int startIndex)
     {
@@ -34,7 +41,47 @@ public class ScreenshotViewerForm : Form
         };
         this.Controls.Add(_pictureBox);
 
+        // Add Save button
+        _saveButton = new Button
+        {
+            Text = "Save changes",
+            Dock = DockStyle.Top,
+            Height = 40
+        };
+        _saveButton.Click += SaveButton_Click;
+        this.Controls.Add(_saveButton);
+
+        // Add Clear Rectangle button
+        _clearRectButton = new Button
+        {
+            Text = "Clear Rectangle",
+            Dock = DockStyle.Top,
+            Height = 40
+        };
+        _clearRectButton.Click += ClearRectButton_Click;
+        this.Controls.Add(_clearRectButton);
+
+        // Add Clear All Changes button
+        _clearAllButton = new Button
+        {
+            Text = "Clear All Changes",
+            Dock = DockStyle.Top,
+            Height = 40
+        };
+        _clearAllButton.Click += ClearAllButton_Click;
+        this.Controls.Add(_clearAllButton);
+        this.Controls.SetChildIndex(_clearAllButton, 0); // Ensure it's at the top
+
+        // Ensure buttons are at the top in the correct order
+        this.Controls.SetChildIndex(_clearRectButton, 1);
+        this.Controls.SetChildIndex(_saveButton, 2);
+
         this.KeyDown += ScreenshotViewerForm_KeyDown;
+
+        _pictureBox.MouseDown += pictureBoxPreview_MouseDown;
+        _pictureBox.MouseMove += pictureBoxPreview_MouseMove;
+        _pictureBox.MouseUp += pictureBoxPreview_MouseUp;
+        _pictureBox.Paint += pictureBoxPreview_Paint;
     }
 
     private void LoadScreenshot()
@@ -84,5 +131,131 @@ public class ScreenshotViewerForm : Form
                 LoadScreenshot();
             }
         }
+    }
+
+    private void pictureBoxPreview_MouseDown(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Left)
+        {
+            isDrawing = true;
+            startPoint = e.Location;
+            currentRect = new Rectangle(e.Location, Size.Empty);
+        }
+    }
+
+    private void pictureBoxPreview_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (isDrawing)
+        {
+            int width = e.X - startPoint.X;
+            int height = e.Y - startPoint.Y;
+            currentRect = new Rectangle(
+                Math.Min(startPoint.X, e.X),
+                Math.Min(startPoint.Y, e.Y),
+                Math.Abs(width),
+                Math.Abs(height));
+            _pictureBox.Invalidate(); // Triggers repaint
+        }
+    }
+
+    private void pictureBoxPreview_MouseUp(object sender, MouseEventArgs e)
+    {
+        if (isDrawing)
+        {
+            isDrawing = false;
+            _pictureBox.Invalidate();
+        }
+    }
+
+    private void pictureBoxPreview_Paint(object sender, PaintEventArgs e)
+    {
+        if (currentRect != Rectangle.Empty)
+        {
+            using (var pen = new Pen(Color.Red, 2))
+            {
+                e.Graphics.DrawRectangle(pen, currentRect);
+            }
+        }
+    }
+
+    private void SaveButton_Click(object sender, EventArgs e)
+    {
+        if (_pictureBox.Image == null || _screenshots.Count == 0 || _currentIndex < 0)
+            return;
+
+        // Create a new bitmap based on the current image
+        Bitmap original = _screenshots[_currentIndex].Image;
+        Bitmap updated = new Bitmap(original.Width, original.Height);
+
+        using (Graphics g = Graphics.FromImage(updated))
+        {
+            // Draw the original image
+            g.DrawImage(original, 0, 0, original.Width, original.Height);
+
+            // Calculate the rectangle in image coordinates
+            Rectangle imageRect = GetImageRectangleInPictureBox(_pictureBox);
+            if (currentRect != Rectangle.Empty && imageRect.Width > 0 && imageRect.Height > 0)
+            {
+                float scaleX = (float)original.Width / imageRect.Width;
+                float scaleY = (float)original.Height / imageRect.Height;
+
+                int x = (int)((currentRect.X - imageRect.X) * scaleX);
+                int y = (int)((currentRect.Y - imageRect.Y) * scaleY);
+                int w = (int)(currentRect.Width * scaleX);
+                int h = (int)(currentRect.Height * scaleY);
+
+                using (var pen = new Pen(Color.Red, 4))
+                {
+                    g.DrawRectangle(pen, x, y, w, h);
+                }
+            }
+        }
+
+        // Dispose the old image and update the list
+        _screenshots[_currentIndex].Image.Dispose();
+        _screenshots[_currentIndex].Image = updated;
+
+        // Clear the drawn rectangle and reload the screenshot
+        currentRect = Rectangle.Empty;
+        LoadScreenshot();
+    }
+
+    private void ClearRectButton_Click(object sender, EventArgs e)
+    {
+        currentRect = Rectangle.Empty;
+        _pictureBox.Invalidate();
+    }
+
+    private void ClearAllButton_Click(object sender, EventArgs e)
+    {
+        if (_screenshots.Count == 0 || _currentIndex < 0)
+            return;
+
+        var info = _screenshots[_currentIndex];
+        if (info.OriginalImage != null)
+        {
+            info.Image.Dispose();
+            info.Image = new Bitmap(info.OriginalImage); // Clone to avoid reference issues
+            currentRect = Rectangle.Empty;
+            LoadScreenshot();
+        }
+    }
+
+    // Helper to get the image rectangle inside the PictureBox (for Zoom mode)
+    private Rectangle GetImageRectangleInPictureBox(PictureBox pb)
+    {
+        if (pb.Image == null) return Rectangle.Empty;
+        var img = pb.Image;
+        var pbWidth = pb.ClientSize.Width;
+        var pbHeight = pb.ClientSize.Height;
+        var imgWidth = img.Width;
+        var imgHeight = img.Height;
+
+        float ratio = Math.Min((float)pbWidth / imgWidth, (float)pbHeight / imgHeight);
+        int width = (int)(imgWidth * ratio);
+        int height = (int)(imgHeight * ratio);
+        int x = (pbWidth - width) / 2;
+        int y = (pbHeight - height) / 2;
+        return new Rectangle(x, y, width, height);
     }
 }

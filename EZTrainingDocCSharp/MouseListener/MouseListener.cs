@@ -71,6 +71,7 @@ namespace EZTrainingDocCSharp.Mouse
                 _capturedScreenshotsList.Add(new ScreenshotInfo
                 {
                     Image = screenshot,
+                    OriginalImage = screenshot,
                     Coordinates = new System.Drawing.Point(x, y),
                     ClickType = "left click"
                 });
@@ -90,6 +91,7 @@ namespace EZTrainingDocCSharp.Mouse
                 _capturedScreenshotsList.Add(new ScreenshotInfo
                 {
                     Image = screenshot,
+                    OriginalImage = screenshot,
                     Coordinates = new System.Drawing.Point(x, y),
                     ClickType = "right click"
                 });
