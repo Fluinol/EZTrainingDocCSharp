@@ -11,7 +11,6 @@ public class ScreenshotViewerForm : Form
     private int _currentIndex;
     private PictureBox _pictureBox;
     private Button _saveButton;
-    private Button _clearRectButton;
     private Button _clearAllButton;
 
 
@@ -50,7 +49,7 @@ public class ScreenshotViewerForm : Form
         // Save button
         _saveButton = new Button
         {
-            Text = "Save changes",
+            Text = "Save",
             Width = 140,
             Height = 36,
             Margin = new Padding(4, 4, 4, 4)
@@ -58,21 +57,11 @@ public class ScreenshotViewerForm : Form
         _saveButton.Click += SaveButton_Click;
         topPanel.Controls.Add(_saveButton);
 
-        // Clear Rectangle button
-        _clearRectButton = new Button
-        {
-            Text = "Clear Rectangle",
-            Width = 140,
-            Height = 36,
-            Margin = new Padding(4, 4, 4, 4)
-        };
-        _clearRectButton.Click += ClearRectButton_Click;
-        topPanel.Controls.Add(_clearRectButton);
-
+      
         // Clear All Changes button
         _clearAllButton = new Button
         {
-            Text = "Clear All Changes",
+            Text = "Clear all",
             Width = 140,
             Height = 36,
             Margin = new Padding(4, 4, 4, 4)
@@ -251,12 +240,6 @@ public class ScreenshotViewerForm : Form
         // Clear the drawn rectangle and reload the screenshot
         currentRect = Rectangle.Empty;
         LoadScreenshot();
-    }
-
-    private void ClearRectButton_Click(object sender, EventArgs e)
-    {
-        currentRect = Rectangle.Empty;
-        _pictureBox.Invalidate();
     }
 
     private void ClearAllButton_Click(object sender, EventArgs e)
