@@ -279,5 +279,98 @@ namespace EZTrainingDocCSharp
         {
             PopulateThumbnails();
         }
+
+        private void btnLeft_Click(object sender, EventArgs e)
+        {
+            var selectedIndices = GetSelectedIndices();
+            if (selectedIndices.Count != 1)
+            {
+                MessageBox.Show("Please select a single screenshot to move.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int idx = selectedIndices[0];
+            if (idx == 0)
+                return; // Already at the leftmost position
+
+            // Swap with previous
+            var temp = screenshots[idx - 1];
+            screenshots[idx - 1] = screenshots[idx];
+            screenshots[idx] = temp;
+
+            PopulateThumbnails();
+            checkBoxes[idx - 1].Checked = true; // Keep selection on moved screenshot
+        }
+
+        private void btbRight_Click(object sender, EventArgs e)
+        {
+            var selectedIndices = GetSelectedIndices();
+            if (selectedIndices.Count != 1)
+            {
+                MessageBox.Show("Please select a single screenshot to move.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int idx = selectedIndices[0];
+            if (idx == screenshots.Count - 1)
+                return; // Already at the rightmost position
+
+            // Swap with next
+            var temp = screenshots[idx + 1];
+            screenshots[idx + 1] = screenshots[idx];
+            screenshots[idx] = temp;
+
+            PopulateThumbnails();
+            checkBoxes[idx + 1].Checked = true; // Keep selection on moved screenshot
+        }
+
+       
+
+
+
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            var selectedIndices = GetSelectedIndices();
+            if (selectedIndices.Count != 1)
+            {
+                MessageBox.Show("Please select a single screenshot to move.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int idx = selectedIndices[0];
+            if (idx == 0)
+                return; // Already at the first position
+
+            var item = screenshots[idx];
+            screenshots.RemoveAt(idx);
+            screenshots.Insert(0, item);
+
+            PopulateThumbnails();
+            checkBoxes[0].Checked = true; // Keep selection on moved screenshot
+
+        }
+
+        private void btnLast_Click(object sender, EventArgs e)
+        {
+            var selectedIndices = GetSelectedIndices();
+            if (selectedIndices.Count != 1)
+            {
+                MessageBox.Show("Please select a single screenshot to move.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int idx = selectedIndices[0];
+            if (idx == screenshots.Count - 1)
+                return; // Already at the last position
+
+            var item = screenshots[idx];
+            screenshots.RemoveAt(idx);
+            screenshots.Add(item);
+
+            PopulateThumbnails();
+            checkBoxes[screenshots.Count - 1].Checked = true; // Keep selection on moved screenshot
+        }
+
+
     }
 }

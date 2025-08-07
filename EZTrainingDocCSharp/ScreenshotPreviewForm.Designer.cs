@@ -43,12 +43,20 @@ namespace EZTrainingDocCSharp
             this.lblPreviewExplanation = new System.Windows.Forms.Label();
             this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipScreenshotPrev = new System.Windows.Forms.ToolTip(this.components);
+            this.btnLeft = new System.Windows.Forms.Button();
+            this.btbRight = new System.Windows.Forms.Button();
+            this.btnLast = new System.Windows.Forms.Button();
+            this.btnFirst = new System.Windows.Forms.Button();
             this.actionButtonsPanel.SuspendLayout();
             this.selectionControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // actionButtonsPanel
             // 
+            this.actionButtonsPanel.Controls.Add(this.btnLast);
+            this.actionButtonsPanel.Controls.Add(this.btnFirst);
+            this.actionButtonsPanel.Controls.Add(this.btbRight);
+            this.actionButtonsPanel.Controls.Add(this.btnLeft);
             this.actionButtonsPanel.Controls.Add(this.btnWebSave);
             this.actionButtonsPanel.Controls.Add(this.chkSelectAll);
             this.actionButtonsPanel.Controls.Add(this.btnDelete);
@@ -157,6 +165,46 @@ namespace EZTrainingDocCSharp
             this.flowPanel.Size = new System.Drawing.Size(800, 351);
             this.flowPanel.TabIndex = 2;
             // 
+            // btnLeft
+            // 
+            this.btnLeft.Location = new System.Drawing.Point(510, 15);
+            this.btnLeft.Name = "btnLeft";
+            this.btnLeft.Size = new System.Drawing.Size(45, 45);
+            this.btnLeft.TabIndex = 4;
+            this.btnLeft.Text = "left";
+            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+            // 
+            // btbRight
+            // 
+            this.btbRight.Location = new System.Drawing.Point(561, 15);
+            this.btbRight.Name = "btbRight";
+            this.btbRight.Size = new System.Drawing.Size(45, 45);
+            this.btbRight.TabIndex = 5;
+            this.btbRight.Text = "right";
+            this.btbRight.UseVisualStyleBackColor = true;
+            this.btbRight.Click += new System.EventHandler(this.btbRight_Click);
+            // 
+            // btnLast
+            // 
+            this.btnLast.Location = new System.Drawing.Point(612, 15);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(45, 45);
+            this.btnLast.TabIndex = 7;
+            this.btnLast.Text = "last";
+            this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.Location = new System.Drawing.Point(459, 15);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(45, 45);
+            this.btnFirst.TabIndex = 6;
+            this.btnFirst.Text = "first";
+            this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
+            // 
             // ScreenshotPreviewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -168,8 +216,8 @@ namespace EZTrainingDocCSharp
             this.Icon = global::EZTrainingDocCSharp.Properties.Resources.video_camera_64px;
             this.Name = "ScreenshotPreviewForm";
             this.Text = "ScreenshotPreviewForm";
-            this.Load += new System.EventHandler(this.ScreenshotPreviewForm_Load);
             this.Activated += new System.EventHandler(this.ScreenshotPreviewForm_Activated);
+            this.Load += new System.EventHandler(this.ScreenshotPreviewForm_Load);
             this.actionButtonsPanel.ResumeLayout(false);
             this.actionButtonsPanel.PerformLayout();
             this.selectionControlPanel.ResumeLayout(false);
@@ -191,5 +239,9 @@ namespace EZTrainingDocCSharp
         private System.Windows.Forms.ToolTip toolTipScreenshotPrev;
         private System.Windows.Forms.Button btnWebSave;
         private System.Windows.Forms.Label lblPreviewExplanation;
+        private System.Windows.Forms.Button btbRight;
+        private System.Windows.Forms.Button btnLeft;
+        private System.Windows.Forms.Button btnLast;
+        private System.Windows.Forms.Button btnFirst;
     }
 }
