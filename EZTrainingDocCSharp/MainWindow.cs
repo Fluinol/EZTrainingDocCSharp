@@ -39,6 +39,7 @@ namespace EZTrainingDocCSharp
         private bool isRecording = false;
         private static Thread mouseListenerThread;
         public static int maxScreenshotCount = 10; // Maximum number of screenshots to capture
+        private bool isMaxScreenshotCountReached = false;
 
 
 
