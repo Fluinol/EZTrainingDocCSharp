@@ -33,6 +33,10 @@ namespace EZTrainingDocCSharp
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScreenshotPreviewForm));
             this.actionButtonsPanel = new System.Windows.Forms.Panel();
+            this.btnLast = new System.Windows.Forms.Button();
+            this.btnFirst = new System.Windows.Forms.Button();
+            this.btbRight = new System.Windows.Forms.Button();
+            this.btnLeft = new System.Windows.Forms.Button();
             this.btnWebSave = new System.Windows.Forms.Button();
             this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -43,10 +47,6 @@ namespace EZTrainingDocCSharp
             this.lblPreviewExplanation = new System.Windows.Forms.Label();
             this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.toolTipScreenshotPrev = new System.Windows.Forms.ToolTip(this.components);
-            this.btnLeft = new System.Windows.Forms.Button();
-            this.btbRight = new System.Windows.Forms.Button();
-            this.btnLast = new System.Windows.Forms.Button();
-            this.btnFirst = new System.Windows.Forms.Button();
             this.actionButtonsPanel.SuspendLayout();
             this.selectionControlPanel.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +68,46 @@ namespace EZTrainingDocCSharp
             this.actionButtonsPanel.Name = "actionButtonsPanel";
             this.actionButtonsPanel.Size = new System.Drawing.Size(800, 75);
             this.actionButtonsPanel.TabIndex = 0;
+            // 
+            // btnLast
+            // 
+            this.btnLast.Image = ((System.Drawing.Image)(resources.GetObject("btnLast.Image")));
+            this.btnLast.Location = new System.Drawing.Point(612, 15);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(45, 45);
+            this.btnLast.TabIndex = 7;
+            this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.Image = ((System.Drawing.Image)(resources.GetObject("btnFirst.Image")));
+            this.btnFirst.Location = new System.Drawing.Point(459, 15);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(45, 45);
+            this.btnFirst.TabIndex = 6;
+            this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
+            // 
+            // btbRight
+            // 
+            this.btbRight.Image = ((System.Drawing.Image)(resources.GetObject("btbRight.Image")));
+            this.btbRight.Location = new System.Drawing.Point(561, 15);
+            this.btbRight.Name = "btbRight";
+            this.btbRight.Size = new System.Drawing.Size(45, 45);
+            this.btbRight.TabIndex = 5;
+            this.btbRight.UseVisualStyleBackColor = true;
+            this.btbRight.Click += new System.EventHandler(this.btbRight_Click);
+            // 
+            // btnLeft
+            // 
+            this.btnLeft.Image = ((System.Drawing.Image)(resources.GetObject("btnLeft.Image")));
+            this.btnLeft.Location = new System.Drawing.Point(510, 15);
+            this.btnLeft.Name = "btnLeft";
+            this.btnLeft.Size = new System.Drawing.Size(45, 45);
+            this.btnLeft.TabIndex = 4;
+            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
             // 
             // btnWebSave
             // 
@@ -164,46 +204,6 @@ namespace EZTrainingDocCSharp
             this.flowPanel.Name = "flowPanel";
             this.flowPanel.Size = new System.Drawing.Size(800, 351);
             this.flowPanel.TabIndex = 2;
-            // 
-            // btnLeft
-            // 
-            this.btnLeft.Location = new System.Drawing.Point(510, 15);
-            this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(45, 45);
-            this.btnLeft.TabIndex = 4;
-            this.btnLeft.Text = "left";
-            this.btnLeft.UseVisualStyleBackColor = true;
-            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
-            // 
-            // btbRight
-            // 
-            this.btbRight.Location = new System.Drawing.Point(561, 15);
-            this.btbRight.Name = "btbRight";
-            this.btbRight.Size = new System.Drawing.Size(45, 45);
-            this.btbRight.TabIndex = 5;
-            this.btbRight.Text = "right";
-            this.btbRight.UseVisualStyleBackColor = true;
-            this.btbRight.Click += new System.EventHandler(this.btbRight_Click);
-            // 
-            // btnLast
-            // 
-            this.btnLast.Location = new System.Drawing.Point(612, 15);
-            this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(45, 45);
-            this.btnLast.TabIndex = 7;
-            this.btnLast.Text = "last";
-            this.btnLast.UseVisualStyleBackColor = true;
-            this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
-            // 
-            // btnFirst
-            // 
-            this.btnFirst.Location = new System.Drawing.Point(459, 15);
-            this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(45, 45);
-            this.btnFirst.TabIndex = 6;
-            this.btnFirst.Text = "first";
-            this.btnFirst.UseVisualStyleBackColor = true;
-            this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // ScreenshotPreviewForm
             // 
