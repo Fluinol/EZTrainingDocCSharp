@@ -277,4 +277,14 @@ public class ScreenshotViewerForm : Form
         _originalScreenshot?.Dispose();
         _originalScreenshot = new Bitmap(screenshot); // This clones the bitmap
     }
+
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+        if (keyData == Keys.Left || keyData == Keys.Right)
+        {
+            ScreenshotViewerForm_KeyDown(this, new KeyEventArgs(keyData));
+            return true; // Suppress default key movement between controls
+        }
+        return base.ProcessCmdKey(ref msg, keyData);
+    }
 }
