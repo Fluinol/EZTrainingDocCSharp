@@ -12,6 +12,7 @@ namespace EZTrainingDocCSharp.Mouse
     {
         private static IKeyboardMouseEvents _globalHook;
         private static List<ScreenshotInfo> _capturedScreenshotsList;
+        private static Action _onLimitReachedCallback;
 
         // Start method only needs the screenshot list
         public static void Start(List<ScreenshotInfo> capturedScreenshotsList)
@@ -19,6 +20,12 @@ namespace EZTrainingDocCSharp.Mouse
             _capturedScreenshotsList = capturedScreenshotsList;
             Start();
 
+        }
+        public static void Start(List<ScreenshotInfo> capturedScreenshotsList, Action onLimitReached)
+        {
+            _capturedScreenshotsList = capturedScreenshotsList;
+            _onLimitReachedCallback = onLimitReached;
+            Start();
         }
 
         public static void Start()
@@ -53,6 +60,12 @@ namespace EZTrainingDocCSharp.Mouse
 
         private static void OnLeftClick(int x, int y)
         {
+            if (_capturedScreenshotsList.Count >= MainWindow.maxScreenshotCount)
+            {
+                Stop();
+                _onLimitReachedCallback?.Invoke();
+                return;
+            }
             var screenshot = ScreenshotTaker.CaptureScreen();
 
             //save screenshot with timestamp into desktop folder for debugging purposes
@@ -71,7 +84,7 @@ namespace EZTrainingDocCSharp.Mouse
                 _capturedScreenshotsList.Add(new ScreenshotInfo
                 {
                     Image = screenshot,
-                    OriginalImage = screenshot,
+                    //OriginalImage = screenshot, //no used
                     Coordinates = new System.Drawing.Point(x, y),
                     ClickType = "left click"
                 });
@@ -80,6 +93,12 @@ namespace EZTrainingDocCSharp.Mouse
 
         private static void OnRightClick(int x, int y)
         {
+            if (_capturedScreenshotsList.Count >= MainWindow.maxScreenshotCount)
+            {
+                Stop();
+                _onLimitReachedCallback?.Invoke();
+                return;
+            }
             var screenshot = ScreenshotTaker.CaptureScreen();
             if (screenshot != null && _capturedScreenshotsList != null)
             {
@@ -91,7 +110,7 @@ namespace EZTrainingDocCSharp.Mouse
                 _capturedScreenshotsList.Add(new ScreenshotInfo
                 {
                     Image = screenshot,
-                    OriginalImage = screenshot,
+                    //OriginalImage = screenshot, //no used
                     Coordinates = new System.Drawing.Point(x, y),
                     ClickType = "right click"
                 });

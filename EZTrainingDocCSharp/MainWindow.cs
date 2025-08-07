@@ -38,8 +38,8 @@ namespace EZTrainingDocCSharp
         private List<ScreenshotInfo> capturedScreenshotsList = new List<ScreenshotInfo>();
         private bool isRecording = false;
         private static Thread mouseListenerThread;
-        public static int maxScreenshotCount = 10; // Maximum number of screenshots to capture
-        private bool isMaxScreenshotCountReached = false;
+        public static int maxScreenshotCount = 100; // Maximum number of screenshots to capture
+        public static bool isMaxScreenshotCountReached = false;
 
 
 
@@ -63,17 +63,23 @@ namespace EZTrainingDocCSharp
 
         private void btnStartPause_Click(object sender, EventArgs e)
         {
-            isRecording = !isRecording;
+            CheckMaxScreenshotCountReached();
+            if (isMaxScreenshotCountReached)
+            {                
+                MessageBox.Show("Maximum number of screenshots reached at" + maxScreenshotCount + ".", "Limit Reached", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (isRecording)
             {
-                Start();
+                Pause();
+
 
             }
             else
             {
-                Pause();
-                
+                Start();
+
             }
             this.Invalidate(); // Force redraw to update border
         }
@@ -141,6 +147,7 @@ namespace EZTrainingDocCSharp
         }
         private void Start()
         {
+            isRecording = true;
             //btnStartPause.Text = "Pause";
             var pauseImage = global::EZTrainingDocCSharp.Properties.Resources.pause48px.ToBitmap();
             btnStartPause.Image = new Bitmap(pauseImage, new Size(45, 45));
@@ -154,7 +161,8 @@ namespace EZTrainingDocCSharp
             {
                 //mouseListenerThread = new Thread(() => Mouse.MouseListener.Start(capturedScreenshotsList));
                 //mouseListenerThread.IsBackground = true;
-                Mouse.MouseListener.Start(capturedScreenshotsList);
+                //Mouse.MouseListener.Start(capturedScreenshotsList); // W/O maxScreenshotCount callback
+                Mouse.MouseListener.Start(capturedScreenshotsList, OnMaxScreenshotLimitReached); // W/ invoker callback
 
 
             }
@@ -162,6 +170,7 @@ namespace EZTrainingDocCSharp
 
         private void Pause()
         {
+            isRecording = false;
             //btnStartPause.Text = "Resume recording";                
             var recordImage = global::EZTrainingDocCSharp.Properties.Resources.rec48px.ToBitmap();
             btnStartPause.Image = new Bitmap(recordImage, new Size(45, 45));
@@ -174,6 +183,30 @@ namespace EZTrainingDocCSharp
                 mouseListenerThread.Join(500); // Optionally wait for thread to finish
                 mouseListenerThread = null;
             }
+        }
+        private void OnMaxScreenshotLimitReached()
+        {
+            isRecording = false;
+            isMaxScreenshotCountReached = true;
+            this.Invalidate(); // clear red border
+            this.Invoke((MethodInvoker)delegate
+            {
+                btnStartPause.Image = new Bitmap(global::EZTrainingDocCSharp.Properties.Resources.rec48px.ToBitmap(), new Size(45, 45));
+                this.Invalidate(); // clear red border
+                MessageBox.Show("Maximum number of screenshots reached at" + maxScreenshotCount + ".", "Limit Reached", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            });
+
+        }
+
+        private void CheckMaxScreenshotCountReached()
+        {
+            if (capturedScreenshotsList.Count >= maxScreenshotCount)
+                isMaxScreenshotCountReached = true;
+
+            else
+
+                isMaxScreenshotCountReached = false;
+
         }
     }
 }
