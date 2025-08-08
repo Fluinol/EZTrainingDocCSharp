@@ -227,7 +227,8 @@ namespace EZTrainingDocCSharp
             //Pending create Webcreator class
             var creator = new HTMLCreator();
             // Assume Create returns the file path of the created document
-            string docPath = creator.Create(selectedFolderPath, screenshots);
+            // string docPath = creator.Create(selectedFolderPath, screenshots); //we use new version style
+            string docPath = creator.CreateV2(selectedFolderPath, screenshots);
 
             var result = MessageBox.Show(
                 "HTML document created successfully. Do you want to open it?", // Make the question clear

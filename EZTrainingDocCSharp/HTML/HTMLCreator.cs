@@ -106,5 +106,103 @@ function saveHTML() {
                 return $"Error: {ex.Message}";
             }
         }
+        public string CreateV2(string outputFolder, List<ScreenshotInfo> screenshots)
+        {
+            try
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine("<!DOCTYPE html>");
+                sb.AppendLine("<html><head><meta charset='UTF-8'><title>EZ Training Doc</title>");
+                sb.AppendLine("<style>");
+                sb.AppendLine("body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; margin: 30px; color: #333; }");
+                sb.AppendLine("h1 { font-size: 2.5em; color: #2c3e50; margin-bottom: 10px; }");
+                sb.AppendLine(".meta { font-size: 1em; margin-bottom: 20px; color: #555; }");
+                sb.AppendLine(".t { font-size: 1.2em; font-weight: bold; display: block; margin-bottom: 10px; }");
+                sb.AppendLine(".step-container { background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 30px; }");
+                sb.AppendLine(".step-title { font-size: 1.3em; font-weight: bold; color: #2980b9; margin-bottom: 10px; }");
+                sb.AppendLine(".desc { font-style: italic; margin-bottom: 10px; color: #444; }");
+                sb.AppendLine(".screenshot img { max-width: 100%; border: 1px solid #ccc; border-radius: 4px; margin-top: 10px; }");
+                sb.AppendLine(".nav { text-align: right; font-size: 0.9em; margin-bottom: 10px; color: #999; }");
+                sb.AppendLine("a { color: #2980b9; text-decoration: none; }a:hover { text-decoration: underline; }");
+                sb.AppendLine("</style>");
+                sb.AppendLine(@"<script>
+function saveHTML() {
+    var htmlContent = document.documentElement.outerHTML;
+    var blob = new Blob([htmlContent], {type: 'text/html'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'EZ_Training_Doc_Edited.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+</script>");
+                sb.AppendLine("</head><body>");
+
+                // Add logo and title block
+                //sb.AppendLine("<div style='display:flex;align-items:center;margin-bottom:10px;'>");
+                //sb.AppendLine("<img src='https://yourcompany.com/logo.png' alt='Company Logo' style='height:48px;margin-right:16px;'/>");
+                sb.AppendLine("<h1 contenteditable='true'>EZ Training Document</h1>");               
+                sb.AppendLine($"<div class='meta'>Document Created: {DateTime.Now:yyyy-MM-dd HH:mm:ss}</div>");
+                
+                // Move the Save button below the edit instructions, aligned left
+                sb.AppendLine("<div style='margin:12px 0;text-align:left;'>");
+                sb.AppendLine("<button onclick='saveHTML()'>Save HTML</button>");
+                sb.AppendLine("</div>");
+
+                if (screenshots.Count > 0)
+                {
+                    for (int i = 0; i < screenshots.Count; i++)
+                    {
+                        // Convert image to Base64
+                        string base64Image;
+                        using (var ms = new MemoryStream())
+                        {
+                            screenshots[i].Image.Save(ms, ImageFormat.Png);
+                            base64Image = Convert.ToBase64String(ms.ToArray());
+                        }
+
+                        // Navigation
+                        sb.AppendLine($"<div class='step-container'><div class='nav' id='nav_{i + 1}'>");
+                        if (i > 0)
+                            sb.AppendLine($"<a href='#nav_{i}'>← Previous (Step {i:D2})</a> | ");
+                        else
+                            //add step 01 link 
+                            sb.AppendLine($"<a href='#nav_{1}'>← Previous (Step {1:D2})</a> | ");
+
+                        if (i < screenshots.Count - 1)
+                            sb.AppendLine($"<a href='#nav_{i + 2}'>Next (Step {(i + 2):D2}) →</a>");
+                        else
+                            sb.AppendLine("End of the document");
+                        sb.AppendLine("</div>");
+
+                        // Step heading (no id here)
+                        sb.AppendLine($"<div class='step-title'>Step {i + 1}:</div>");
+
+                        // Description (now editable)
+                        sb.AppendLine($"<div class='desc' contenteditable='true'>AddDescriptionHere</div>");
+
+                        // Screenshot (embedded)
+                        sb.AppendLine($"<div class='screenshot'><img src='data:image/png;base64,{base64Image}' alt='Screenshot {i + 1}' /></div>");
+                        sb.AppendLine("</div>");
+                    }
+                }
+                else
+                {
+                    sb.AppendLine("<p>No screenshots captured.</p>");
+                }
+
+                sb.AppendLine("</body></html>");
+
+                string fileName = $"EZ_Training_DocV2_{DateTime.Now:yyyyMMdd_HHmmss}.html";
+                string filePath = Path.Combine(outputFolder, fileName);
+                File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
+                return filePath;
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
     }
 }
